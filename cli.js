@@ -98,13 +98,13 @@ async function processPage(pagePath) {
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = componentHead
 
-    const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
-    const headerElement = document.getElementById('header')
-    headerElement.innerHTML = componentHeader
+    // const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
+    // const headerElement = document.getElementById('header')
+    // headerElement.innerHTML = componentHeader
     
-    const componentNav = await fs.readFile('templates/component_nav.html', 'utf-8')
-    const navElement = document.getElementById('nav')
-    navElement.innerHTML = componentNav
+    // const componentNav = await fs.readFile('templates/component_nav.html', 'utf-8')
+    // const navElement = document.getElementById('nav')
+    // navElement.innerHTML = componentNav
 
     const pageContentElement = document.getElementById('page-content')
 
