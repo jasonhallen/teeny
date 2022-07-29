@@ -93,6 +93,10 @@ async function processPage(pagePath) {
     const dom = await JSDOM.fromFile(templatePath)
     const parsedHtml = marked.parse(markdown)
     const document = dom.window.document
+    
+    const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
+    const headElement = document.getElementsByTagName('head')
+    headElement[0].innerHTML = componentHead
 
     const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
     const headerElement = document.getElementById('header')
