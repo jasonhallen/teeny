@@ -134,7 +134,7 @@ async function processPage(pagePath) {
         document.title = title
     }
 
-    const finalHtml = document.doctype+"\n"+document.getElementsByTagName('html')[0].outerHTML
+    const finalHtml = "<!DOCTYPE "+document.doctype.name+">\n"+document.getElementsByTagName('html')[0].outerHTML
 
     const pagePathParts = pagePath.replace('pages/', '').split('/')
     const pageName = pagePathParts.pop().split('.md')[0]
