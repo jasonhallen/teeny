@@ -145,6 +145,7 @@ async function processPage(pagePath) {
         const readMoreParent = document.getElementsByClassName("readmore")[0].parentNode
         console.log(readMoreParent)
         while (readMoreParent.nextElementSibling !== null) {
+            console.log("TESTING")
             readMoreParent.nextElementSibling.remove()
         }
         let pageContentChildren = [pageContentElement.children]
