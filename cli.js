@@ -118,8 +118,7 @@ async function processPage(pagePath) {
 
     if (frontmatter.date) {20220729
         const calendar = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-        let month = frontmatter.date.toString().slice(4,6).parseInt()
-        month = calendar[month]
+        let month = calendar[parseInt(frontmatter.date.toString().slice(4,6)) - 1]
         const day = frontmatter.date.toString().slice(6)
         const year = frontmatter.date.toString().slice(0,4)
         let dateSpan = document.createElement("span")
