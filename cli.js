@@ -142,15 +142,16 @@ async function processPage(pagePath) {
 
     if (targetPath === "blog") {
         // Strip everything after READ MORE and push to blogPages
+        // Add link to h2
         let documentCopy = document.cloneNode(true)
+        let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
+        documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
         const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
         while (readMoreParent.nextElementSibling !== null) {
             readMoreParent.nextElementSibling.remove()
         }
         blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
     }
-
-    // Strip out READ MORE element
 
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
@@ -198,16 +199,6 @@ async function blogIndex() {
     pageContentElement.innerHTML = aggregatePages
     
     const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
-
-    // let finalDom = await JSDOM(finalHtml)
-    // let finalDocument = finalDom.window.document
-    // let h2Array= finalDocument.getElementsByTagName("h2")
-    // for (h2 in h2Array) {
-    //     let dateSpan = finalDocument.createElement("span")
-    //     dateSpan.setAttribute("class", "muted")
-    //     dateSpan.innerHTML = month + " " + day + ", " + year
-    //     dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling)
-    // }
     
     await fs.writeFile(`public/index.html`, finalHtml)
 
