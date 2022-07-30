@@ -142,11 +142,12 @@ async function processPage(pagePath) {
 
     if (targetPath === "blog") {
         // Strip everything after READ MORE and push to blogPages
-        const readMoreParent = document.getElementsByClassName("readmore")[0].parentNode
+        let documentCopy = document.cloneNode(true)
+        const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
         while (readMoreParent.nextElementSibling !== null) {
             readMoreParent.nextElementSibling.remove()
         }
-        blogPages.push([frontmatter, document.getElementById('page-content').innerHTML])
+        blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
     }
 
     // Strip out READ MORE element
