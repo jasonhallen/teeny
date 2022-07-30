@@ -106,10 +106,6 @@ async function processPage(pagePath) {
     const pageName = pagePathParts.pop().split('.md')[0]
     const targetPath = pagePathParts.join('/')
 
-    if (targetPath === "blog") {
-        blogPages.push([frontmatter, parsedHtml])
-    }
-
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = componentHead
@@ -144,6 +140,10 @@ async function processPage(pagePath) {
         dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling)
     }
 
+    if (targetPath === "blog") {
+        blogPages.push([frontmatter, parsedHtml])
+    }
+
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
         console.log(`Templates should contain the 'html' tag.`)
@@ -168,12 +168,10 @@ async function processPage(pagePath) {
 }
 
 async function blogIndex() {
-    // 1. Create array of blog posts
-    // 2. Parse each one into front-matter and markdown
-    // 3. Sort array by date
-    // 4. Construct HTML page out of each post up to the "Read More" button
-    // let contents = await fs.readdir(`public/blog/`)
-    // console.log(contents)
+    
+    // Construct HTML page out of each post up to the "Read More" button
+    // Create link out of h2s
+    // Add date lines
 
     const dom = await JSDOM.fromFile('templates/index.html')
     const document = dom.window.document
@@ -193,6 +191,16 @@ async function blogIndex() {
     
     const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
 
+    // let finalDom = await JSDOM(finalHtml)
+    // let finalDocument = finalDom.window.document
+    // let h2Array= finalDocument.getElementsByTagName("h2")
+    // for (h2 in h2Array) {
+    //     let dateSpan = finalDocument.createElement("span")
+    //     dateSpan.setAttribute("class", "muted")
+    //     dateSpan.innerHTML = month + " " + day + ", " + year
+    //     dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling)
+    // }
+    
     await fs.writeFile(`public/index.html`, finalHtml)
 
     // console.log(blogPages)
