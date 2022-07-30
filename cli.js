@@ -32,14 +32,18 @@ async function build() {
 
     await safeExecute(
         async () =>
+            // Copy files in 'templates' to 'public' but filter out files that start with '.' or end with '.html'
             await fs.copy('templates/', 'public/', { filter: (f) => !f.startsWith('.') && !f.endsWith('.html') })
     )
     await safeExecute(
+        // Copy files in 'pages' to 'public' but filter out files that start with '.' or end with '.md'
         async () => await fs.copy('pages/', 'public/', { filter: (f) => !f.startsWith('.') && !f.endsWith('.md') })
     )
-    await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
-    let contents = await fs.readdir(`pages/`)
+    let contents = await fs.readdir(`public/blog/`)
     console.log(contents)
+    // Copy files in 'static' to 'public' but filter out files that start with '.'
+    await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
+
     await processDirectory('pages')
 }
 
