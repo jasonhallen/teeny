@@ -116,6 +116,14 @@ async function processPage(pagePath) {
         )
     }
 
+    if (frontmatter.date) {
+        let dateSpan = document.createElement("span");
+        // dateSpan.attributes
+        dateSpan.innerHTML = frontmatter.date;
+        let dateInsert = document.getElementsByTagName("h2");
+        dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling);
+    }
+
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
         console.log(`Templates should contain the 'html' tag.`)
