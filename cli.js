@@ -160,7 +160,7 @@ async function blogIndex() {
     // 2. Parse each one into front-matter and markdown
     // 3. Sort array by date
     // 4. Construct HTML page out of each post up to the "Read More" button
-    let contents = await fs.readdir(`blog/`)
+    let contents = await fs.readdir(`/blog`)
     console.log(contents)
 }
 
