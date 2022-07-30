@@ -11,6 +11,7 @@ const fm = require('front-matter')
 // body: "# My normal markdown ..."
 const scriptArgs = process.argv.slice(2)
 const command = scriptArgs[0]
+let blogPages = []
 
 switch (command) {
     case 'build':
@@ -101,6 +102,14 @@ async function processPage(pagePath) {
     const parsedHtml = marked.parse(markdown)
     const document = dom.window.document
     
+    const pagePathParts = pagePath.replace('pages/', '').split('/')
+    const pageName = pagePathParts.pop().split('.md')[0]
+    const targetPath = pagePathParts.join('/')
+
+    if (targetPath === "blog") {
+        blogPages.push([frontmatter, parsedHtml])
+    }
+
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = componentHead
@@ -155,9 +164,6 @@ async function processPage(pagePath) {
 
     const finalHtml = "<!DOCTYPE "+document.doctype.name+">\n"+document.getElementsByTagName('html')[0].outerHTML
 
-    const pagePathParts = pagePath.replace('pages/', '').split('/')
-    const pageName = pagePathParts.pop().split('.md')[0]
-    const targetPath = pagePathParts.join('/')
     await fs.writeFile(`public/${targetPath}/${pageName}.html`, finalHtml)
 }
 
