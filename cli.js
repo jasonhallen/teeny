@@ -174,8 +174,28 @@ async function blogIndex() {
     // 4. Construct HTML page out of each post up to the "Read More" button
     // let contents = await fs.readdir(`public/blog/`)
     // console.log(contents)
+
+    const dom = await JSDOM.fromFile('templates/index.html')
+    const document = dom.window.document
+    
+    const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
+    const headElement = document.getElementsByTagName('head')
+    headElement[0].innerHTML = componentHead
+
+    let aggregatePages = ""
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
-    console.log(blogPages)
+    for (const page of blogPages) {
+        aggregatePages += page[1]
+    }
+
+    const pageContentElement = document.getElementById('page-content')
+    pageContentElement.innerHTML = aggregatePages
+    
+    const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
+
+    await fs.writeFile(`public/index.html`, finalHtml)
+
+    // console.log(blogPages)
 }
 
 function startServer(port) {
