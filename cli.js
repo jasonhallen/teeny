@@ -142,6 +142,10 @@ async function processPage(pagePath) {
 
     if (targetPath === "blog") {
         // Strip everything after READ MORE and push to blogPages
+        const readMoreParent = document.getElementsByClassName("readmore")[0].parentNode
+        while (readMoreParent.nextElementSibling) {
+            readMoreParent.nextElementSibling.remove()
+        }
         let pageContentChildren = [pageContentElement.children]
         console.log(pageContentChildren)
 
