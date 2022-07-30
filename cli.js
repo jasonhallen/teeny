@@ -141,8 +141,18 @@ async function processPage(pagePath) {
     }
 
     if (targetPath === "blog") {
+        // Strip everything after READ MORE and push to blogPages
+        let pageContentChildren = pageContentElement.children
+        let readMoreIndex = pageContentChildren.findIndex((element) => element.className === "readmore")
+        for (let index in pageContentChildren.length) {
+            if (index > readMoreIndex) {
+                pageContentChildren[index].remove()
+            }
+        }
         blogPages.push([frontmatter, parsedHtml])
     }
+
+    // Strip out READ MORE element
 
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
@@ -169,7 +179,7 @@ async function processPage(pagePath) {
 
 async function blogIndex() {
     
-    // Construct HTML page out of each post up to the "Read More" button
+    // blogPages should have brief HTML with date included but cut off after Read More
     // Create link out of h2s
     // Add date lines
 
