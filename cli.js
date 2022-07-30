@@ -54,6 +54,7 @@ async function processDirectory(directoryPath) {
         processPagePromises.push(processPage(`${directoryPath}/${element}`))
     }
     await Promise.all(processPagePromises)
+    await blogIndex()
 }
 
 async function develop(port) {
@@ -116,7 +117,7 @@ async function processPage(pagePath) {
         )
     }
 
-    if (frontmatter.date) {20220729
+    if (frontmatter.date) {
         const calendar = ["January","February","March","April","May","June","July","August","September","October","November","December"]
         let month = calendar[parseInt(frontmatter.date.toString().slice(4,6)) - 1]
         const day = frontmatter.date.toString().slice(6)
@@ -152,6 +153,15 @@ async function processPage(pagePath) {
     const pageName = pagePathParts.pop().split('.md')[0]
     const targetPath = pagePathParts.join('/')
     await fs.writeFile(`public/${targetPath}/${pageName}.html`, finalHtml)
+}
+
+async function blogIndex() {
+    // 1. Create array of blog posts
+    // 2. Parse each one into front-matter and markdown
+    // 3. Sort array by date
+    // 4. Construct HTML page out of each post up to the "Read More" button
+    let contents = await fs.readdir(`blog/`)
+    console.log(contents)
 }
 
 function startServer(port) {
