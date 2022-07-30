@@ -117,11 +117,14 @@ async function processPage(pagePath) {
     }
 
     if (frontmatter.date) {
-        let dateSpan = document.createElement("span");
-        // dateSpan.attributes
-        dateSpan.innerHTML = frontmatter.date;
-        let dateInsert = document.getElementsByTagName("h2");
-        dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling);
+        let month = frontmatter.date.toString().slice(4,5)
+        let day = frontmatter.date.toString().slice(6,7)
+        let year = frontmatter.date.toString().slice(0,3)
+        let dateSpan = document.createElement("span")
+        dateSpan.setAttribute("class", "muted")
+        dateSpan.innerHTML = month + " " + day + ", " + year
+        let dateInsert = document.getElementsByTagName("h2")
+        dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling)
     }
 
     const wrapperHtmlElement = document.getElementsByTagName('html')
