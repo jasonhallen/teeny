@@ -146,7 +146,7 @@ async function processPage(pagePath) {
         while (readMoreParent.nextElementSibling !== null) {
             readMoreParent.nextElementSibling.remove()
         }
-        blogPages.push([frontmatter, document.getElementsByTagName('html')[0].innerHTML])
+        blogPages.push([frontmatter, document.getElementById('page-content').innerHTML])
     }
 
     // Strip out READ MORE element
