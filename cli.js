@@ -144,6 +144,7 @@ async function processPage(pagePath) {
         // Strip everything after READ MORE and push to blogPages
         let pageContentChildren = [pageContentElement.children]
         let readMoreIndex = pageContentChildren.findIndex((element) => element.className === "readmore")
+        console.log(readMoreIndex)
         for (let index in pageContentChildren.length) {
             if (index > readMoreIndex) {
                 pageContentChildren[index].remove()
