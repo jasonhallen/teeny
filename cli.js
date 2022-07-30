@@ -143,20 +143,10 @@ async function processPage(pagePath) {
     if (targetPath === "blog") {
         // Strip everything after READ MORE and push to blogPages
         const readMoreParent = document.getElementsByClassName("readmore")[0].parentNode
-        console.log(readMoreParent)
         while (readMoreParent.nextElementSibling !== null) {
-            console.log("TESTING")
             readMoreParent.nextElementSibling.remove()
         }
-        let pageContentChildren = [pageContentElement.children]
-
-        // let readMoreIndex = pageContentChildren.findIndex((element) => element.className === "readmore")
-        // for (let index = 0; index < pageContentChildren.length; index++) {
-        //     if (index > readMoreIndex) {
-        //         pageContentChildren[index].remove()
-        //     }
-        // }
-        blogPages.push([frontmatter, parsedHtml])
+        blogPages.push([frontmatter, document.getElementsByTagName('html')[0].innerHTML])
     }
 
     // Strip out READ MORE element
