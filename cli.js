@@ -153,9 +153,8 @@ async function processPage(pagePath) {
             readMoreParent.nextElementSibling.remove()
         }
         blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
+        document.getElementsByClassName("readmore")[0].parentNode.remove()
     }
-
-    document.getElementsByClassName("readmore")[0].parentNode.remove()
 
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
