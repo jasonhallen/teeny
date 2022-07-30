@@ -155,6 +155,8 @@ async function processPage(pagePath) {
         blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
     }
 
+    document.getElementsByClassName("readmore")[0].parentNode.remove()
+
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
         console.log(`Templates should contain the 'html' tag.`)
