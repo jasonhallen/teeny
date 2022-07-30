@@ -174,6 +174,7 @@ async function blogIndex() {
     // 4. Construct HTML page out of each post up to the "Read More" button
     // let contents = await fs.readdir(`public/blog/`)
     // console.log(contents)
+    blogPages.sort(function(a, b){return a[0].date - b[0].date})
     console.log(blogPages)
 }
 
@@ -199,6 +200,10 @@ function startServer(port) {
             })
         })
         .listen(port)
+}
+
+function formatDate() {
+
 }
 
 async function safeExecute(func) {
