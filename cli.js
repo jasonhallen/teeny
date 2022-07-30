@@ -161,7 +161,7 @@ async function blogIndex() {
     // 3. Sort array by date
     // 4. Construct HTML page out of each post up to the "Read More" button
     let contents = await fs.readdir(`public/blog/`)
-    console.log(contents)
+    // console.log(contents)
 }
 
 function startServer(port) {
