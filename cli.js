@@ -145,7 +145,7 @@ async function processPage(pagePath) {
         let pageContentChildren = [pageContentElement.children]
         let readMoreIndex = pageContentChildren.findIndex((element) => element.className === "readmore")
         console.log(readMoreIndex)
-        for (let index in pageContentChildren.length) {
+        for (let index = 0; index < pageContentChildren.length; index++) {
             if (index > readMoreIndex) {
                 pageContentChildren[index].remove()
             }
