@@ -49,6 +49,7 @@ async function build() {
 
 async function processDirectory(directoryPath) {
     let contents = await fs.readdir(`${directoryPath}/`)
+    console.log(contents)
     const processPagePromises = []
     for (const element of contents) {
         const isDirectory = (await fs.lstat(`${directoryPath}/${element}`)).isDirectory()
