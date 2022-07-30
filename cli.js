@@ -143,9 +143,11 @@ async function processPage(pagePath) {
     if (targetPath === "blog") {
         // Strip everything after READ MORE and push to blogPages
         // Add link to h2
+        // Add link to REAM MORE
         let documentCopy = document.cloneNode(true)
         let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
         documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
+        documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
         const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
         while (readMoreParent.nextElementSibling !== null) {
             readMoreParent.nextElementSibling.remove()
