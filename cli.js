@@ -142,7 +142,7 @@ async function processPage(pagePath) {
 
     if (targetPath === "blog") {
         // Strip everything after READ MORE and push to blogPages
-        let pageContentChildren = pageContentElement.children
+        let pageContentChildren = [pageContentElement.children]
         let readMoreIndex = pageContentChildren.findIndex((element) => element.className === "readmore")
         for (let index in pageContentChildren.length) {
             if (index > readMoreIndex) {
