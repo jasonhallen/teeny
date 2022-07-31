@@ -95,6 +95,10 @@ async function processPage(pagePath) {
     let templatePath = 'templates/default.html'
     const fileData = await fs.readFile(pagePath, 'utf-8')
     const { attributes: frontmatter, body: markdown } = await fm(fileData)
+
+    if (frontmatter.publish === "no") {
+        return
+    }
     if (frontmatter.template) {
         templatePath = `templates/${frontmatter.template}.html`
     }
