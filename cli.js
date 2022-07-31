@@ -29,6 +29,7 @@ switch (command) {
 }
 
 async function build() {
+    blogPages = []
     await fs.emptyDir('public/')
 
     await safeExecute(
