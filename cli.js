@@ -214,14 +214,14 @@ async function blogIndex() {
             
             // Add Prev/Next buttons
             if (pageIndex !== totalBlogPages - 1) {
-                let nextButton = document.createElement("span")
-                nextButton.innerHTML = `<a href="/" class="readmore">Next</a>`
-                page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
+                let newerButton = document.createElement("span")
+                newerButton.innerHTML = `<a href="/" class="readmore">Newer</a>`
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', newerButton);
             }
             if (pageIndex !== 0) {
-                let prevButton = document.createElement("span")
-                prevButton.innerHTML = `<a href="/" class="readmore floatright">Previous</a>`
-                page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevButton);
+                let olderButton = document.createElement("span")
+                olderButton.innerHTML = `<a href="/" class="readmore floatright">Older</a>`
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton);
             }
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
