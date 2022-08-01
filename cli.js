@@ -181,6 +181,7 @@ async function blogIndex() {
     // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
     
+    let originalBlogPages = Array.from(blogPages)
     let totalBlogPages = blogPages.length
     let totalIndexPages = Math.ceil(blogPages.length/postsPerPage)
     let pageCount = 1
@@ -215,7 +216,7 @@ async function blogIndex() {
             // Add Prev/Next buttons
             if (pageIndex !== totalBlogPages - 1) {
                 let newerButton = document.createElement("span")
-                newerButton.innerHTML = `<a href="/" class="readmore">Newer</a>`
+                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}.html" class="readmore">Newer</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', newerButton);
             }
             if (pageIndex !== 0) {
