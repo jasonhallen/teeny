@@ -216,7 +216,7 @@ async function blogIndex() {
             if (pageIndex !== 0) {
                 let prevButton = document.createElement("span")
                 prevButton.innerHTML = `<a href="/" class="readmore">Previous</a>`
-                page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevButton);
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let nextButton = document.createElement("span")
