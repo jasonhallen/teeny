@@ -12,7 +12,7 @@ const fm = require('front-matter')
 const scriptArgs = process.argv.slice(2)
 const command = scriptArgs[0]
 let blogPages = []
-let postsPerPage = 5
+let postsPerPage = 6
 
 switch (command) {
     case 'init':
@@ -239,7 +239,8 @@ async function blogIndex() {
                 document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
                 document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
             }
-        } else if (pageCount === totalPages) {
+        }
+        if (pageCount === totalPages) {
             document.getElementById("paginationForward").setAttribute("class", "muted")
             document.getElementById("paginationEnd").setAttribute("class", "muted")
             if (pageCount !== 1) {
@@ -250,7 +251,8 @@ async function blogIndex() {
                     document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
                 }
             }
-        } else {
+        }
+        if (pageCount !== 1 && pageCount !== totalPages) {
             document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
             if (pageCount === 2) {
                 document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
