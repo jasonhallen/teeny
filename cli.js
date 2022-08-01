@@ -77,7 +77,9 @@ async function processDirectory(directoryPath) {
             await processDirectory(`${directoryPath}/${element}`, processPagePromises)
             continue
         }
-        processPagePromises.push(processPage(`${directoryPath}/${element}`))
+        if (!element.startsWith(".")) {
+            processPagePromises.push(processPage(`${directoryPath}/${element}`))
+        }
     }
     await Promise.all(processPagePromises)
     await blogIndex()
