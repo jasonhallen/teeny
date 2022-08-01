@@ -213,15 +213,15 @@ async function blogIndex() {
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
             
             // Add Prev/Next buttons
-            if (pageIndex !== 0) {
-                let prevButton = document.createElement("span")
-                prevButton.innerHTML = `<a href="/" class="readmore">Previous</a>`
-                page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevButton);
-            }
             if (pageIndex !== totalBlogPages - 1) {
                 let nextButton = document.createElement("span")
                 nextButton.innerHTML = `<a href="/" class="readmore">Next</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
+            }
+            if (pageIndex !== 0) {
+                let prevButton = document.createElement("span")
+                prevButton.innerHTML = `<a href="/" class="readmore floatright">Previous</a>`
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevButton);
             }
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
