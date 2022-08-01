@@ -260,6 +260,8 @@ async function blogIndex() {
             document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
             document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
         }
+        document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalPages}`
+
 
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
         if (pageCount === 1) {
