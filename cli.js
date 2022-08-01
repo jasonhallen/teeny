@@ -215,6 +215,7 @@ async function blogIndex() {
         } else {
             await fs.writeFile(`public/index${pageCount}.html`, finalHtml)
         }
+        pageCount += 1
     }
 
     
