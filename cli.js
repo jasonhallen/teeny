@@ -232,9 +232,12 @@ async function blogIndex() {
         pageContentElement.innerHTML = aggregatePages
         
         // Add pagination
-        let paginationPages = document.getElementById("paginationPages")
+        document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>` 
+        document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>` 
+        document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalPages}`
+        document.getElementById("paginationForward").innerHTML = `<a href="/">>/a>` 
+        document.getElementById("paginationEnd").innerHTML = `<a href="/">>>/a>` 
         // paginationPages.setAttribute("class", "muted")
-        paginationPages.innerHTML = `${pageCount} of ${totalPages}`
         // let dateInsert = document.getElementsByTagName("h2")
         // pageContentElement.parentNode.insertBefore(paginationPages, pageContentElement.nextSibling)
         // pageContentElement.insertAdjacentElement('beforeend', paginationPages)
