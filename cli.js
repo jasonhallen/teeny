@@ -12,6 +12,7 @@ const fm = require('front-matter')
 const scriptArgs = process.argv.slice(2)
 const command = scriptArgs[0]
 let blogPages = []
+let postsPerPage = 6
 
 switch (command) {
     case 'build':
@@ -185,32 +186,39 @@ async function processPage(pagePath) {
 }
 
 async function blogIndex() {
-    
-    // blogPages should have brief HTML with date included but cut off after Read More
-    // Create link out of h2s
-    // Add date lines
 
-    const dom = await JSDOM.fromFile('templates/index.html')
-    const document = dom.window.document
-    
-    const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
-    const headElement = document.getElementsByTagName('head')
-    headElement[0].innerHTML = componentHead
-
-    let aggregatePages = ""
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
-    for (const page of blogPages) {
-        aggregatePages += page[1]
+    
+    let pageCount = 0
+    while (blogPages.length > postsPerPage) {
+        // Slice off the first set of pages
+        // Create HTML page
+        // If not the first time, create folder, place HTML in that folder
+        const dom = await JSDOM.fromFile('templates/index.html')
+        const document = dom.window.document
+        
+        const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
+        const headElement = document.getElementsByTagName('head')
+        headElement[0].innerHTML = componentHead
+        
+        var aggregatePages = ""
+        var tempBlogPages = blogPages.splice(0,postsPerPage)
+        for (const page of tempBlogPages) {
+            aggregatePages += page[1]
+        }
+        const pageContentElement = document.getElementById('page-content')
+        pageContentElement.innerHTML = aggregatePages
+        
+        const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
+        if (pageCount === 0) {
+            await fs.writeFile('public/index.html', finalHtml)
+        } else {
+            await fs.writeFile(`public/index${pageCount}.html`, finalHtml)
+        }
     }
 
-    const pageContentElement = document.getElementById('page-content')
-    pageContentElement.innerHTML = aggregatePages
     
-    const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
-    
-    await fs.writeFile(`public/index.html`, finalHtml)
 
-    // console.log(blogPages)
 }
 
 function startServer(port) {
