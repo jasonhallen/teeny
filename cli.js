@@ -216,12 +216,12 @@ async function blogIndex() {
             // Add Prev/Next buttons
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
-                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}.html" class="readmore">Newer</a>`
+                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}.html" class="readmore floatleft">Newer</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', newerButton);
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let olderButton = document.createElement("span")
-                olderButton.innerHTML = `<a href="/" class="readmore floatright">Older</a>`
+                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}.html" class="readmore floatright">Older</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton);
             }
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
