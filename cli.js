@@ -234,7 +234,7 @@ async function blogIndex() {
         // Add pagination
         let paginationSpan = document.createElement("span")
         paginationSpan.setAttribute("class", "muted")
-        paginationSpan.innerHTML = `Page ${pageCount} of ${totalPages}`
+        paginationSpan.innerHTML = `<< < Page ${pageCount} of ${totalPages} > >>`
         // let dateInsert = document.getElementsByTagName("h2")
         // pageContentElement.parentNode.insertBefore(paginationSpan, pageContentElement.nextSibling)
         pageContentElement.insertAdjacentElement('beforeend', paginationSpan)
