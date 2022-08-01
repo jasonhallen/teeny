@@ -221,8 +221,8 @@ async function blogIndex() {
             let documentCopy = page[1].cloneNode(true)
             // Insert link into H2
             let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
-            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
-            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
+            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="/blog/${page[2]}.html">${h2}</a>`
+            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `/blog/${page[2]}.html`)
             const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
             // Remove all elements below Read More button
             while (readMoreParent.nextElementSibling !== null) {
