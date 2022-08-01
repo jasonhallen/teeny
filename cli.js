@@ -236,14 +236,14 @@ async function blogIndex() {
             document.getElementById("paginationBegin").setAttribute("class", "muted")
             document.getElementById("paginationBack").setAttribute("class", "muted")
             if (pageCount !== totalPages) {
-                document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html"><</a>`
-                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html"><</a>`
+                document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
+                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
             }
         } else if (pageCount === totalPages) {
             document.getElementById("paginationForward").setAttribute("class", "muted")
             document.getElementById("paginationEnd").setAttribute("class", "muted")
             if (pageCount !== 1) {
-                document.getElementById("paginationBegin").innerHTML = `<a href="/"><</a>`
+                document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
                 if (pageCount === 2) {
                     document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
                 } else {
@@ -251,14 +251,14 @@ async function blogIndex() {
                 }
             }
         } else {
-            document.getElementById("paginationBegin").innerHTML = `<a href="/"><</a>`
+            document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
             if (pageCount === 2) {
                 document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
             } else {
                 document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
             }
-            document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html"><</a>`
-            document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html"><</a>`
+            document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
+            document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
         }
 
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
