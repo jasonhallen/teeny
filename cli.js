@@ -67,7 +67,12 @@ async function build() {
     await processDirectory('pages')
 }
 
-// 1. Move template
+// 1. Move 'static' files into 'public/' directory
+// 2. Process the 'pages/' directory which contains .md files of all pages
+// 3. Create array of filenames in 'pages' directory
+// 3.a. For each filename, if directory then process directory
+// 3.b. If not directory, process .md file, add promise to array of processPage promises
+// 4. 
 
 
 async function processDirectory(directoryPath) {
@@ -88,23 +93,28 @@ async function processDirectory(directoryPath) {
 
 async function processPage(pagePath) {
     let templatePath = 'templates/default.html'
+    // Read raw text of .md file
     const fileData = await fs.readFile(pagePath, 'utf-8')
+    // Parse raw text into frontmatter and markdown
     const { attributes: frontmatter, body: markdown } = await fm(fileData)
 
+    // Skip page is set to "publish: no"
     if (frontmatter.publish === "no") {
         return
     }
+    // If there's a template, use this template instead of "default.html"
     if (frontmatter.template) {
         templatePath = `templates/${frontmatter.template}.html`
     }
+    // Generate DOM of template HTML
     const dom = await JSDOM.fromFile(templatePath)
-    const parsedHtml = marked.parse(markdown)
     const document = dom.window.document
     
+    // Parse the path into directory and page name
     const pagePathParts = pagePath.replace('pages/', '').split('/')
     const pageName = pagePathParts.pop().split('.md')[0]
     const targetPath = pagePathParts.join('/')
-
+    // Insert the "component_head" template into "head" element of document
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = componentHead
@@ -117,8 +127,11 @@ async function processPage(pagePath) {
     // const navElement = document.getElementById('nav')
     // navElement.innerHTML = componentNav
 
+    // Convert .md markdown into HTML
+    const parsedHtml = marked.parse(markdown)
     const pageContentElement = document.getElementById('page-content')
 
+    // Add .md HTML to the "page-content" div in the document
     if (pageContentElement) {
         pageContentElement.innerHTML = parsedHtml
     } else {
@@ -127,11 +140,14 @@ async function processPage(pagePath) {
         )
     }
 
+    // Convert YYYYMMDD number into "Month Day, Year" string
     if (frontmatter.date) {
         const calendar = ["January","February","March","April","May","June","July","August","September","October","November","December"]
         let month = calendar[parseInt(frontmatter.date.toString().slice(4,6)) - 1]
         const day = frontmatter.date.toString().slice(6)
         const year = frontmatter.date.toString().slice(0,4)
+
+        // Add span element with date string under page heading
         let dateSpan = document.createElement("span")
         dateSpan.setAttribute("class", "muted")
         dateSpan.innerHTML = month + " " + day + ", " + year
@@ -139,23 +155,7 @@ async function processPage(pagePath) {
         dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling)
     }
 
-    if (targetPath === "blog") {
-        // Strip everything after READ MORE and push to blogPages
-        // Add link to h2
-        // Add link to REAM MORE
-        let documentCopy = document.cloneNode(true)
-        let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
-        documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
-        documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
-        const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
-        while (readMoreParent.nextElementSibling !== null) {
-            readMoreParent.nextElementSibling.remove()
-        }
-        // blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
-        blogPages.push([frontmatter, documentCopy])
-        document.getElementsByClassName("readmore")[0].parentNode.remove()
-    }
-
+    // Check for "html" tag, throw error if not present
     const wrapperHtmlElement = document.getElementsByTagName('html')
     if (!wrapperHtmlElement.length) {
         console.log(`Templates should contain the 'html' tag.`)
@@ -174,12 +174,33 @@ async function processPage(pagePath) {
         document.title = title
     }
 
+    if (targetPath === "blog") {
+        // Strip everything after READ MORE and push to blogPages
+        // Add link to h2
+        // Add link to REAM MORE
+        // let documentCopy = document.cloneNode(true)
+        // let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
+        // documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
+        // documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
+        // const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
+        // while (readMoreParent.nextElementSibling !== null) {
+        //     readMoreParent.nextElementSibling.remove()
+        // }
+        // blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
+        blogPages.push([frontmatter, document])
+        // document.getElementsByClassName("readmore")[0].parentNode.remove()
+        return
+    }
+
     const finalHtml = "<!DOCTYPE "+document.doctype.name+">\n"+document.getElementsByTagName('html')[0].outerHTML
 
     await fs.writeFile(`public/${targetPath}/${pageName}.html`, finalHtml)
 }
 
 async function blogIndex() {
+
+    document.getElementsByClassName("readmore")[0].parentNode.remove()
+
     // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
     
@@ -199,7 +220,15 @@ async function blogIndex() {
         var blogPagesSplice = blogPages.splice(0,postsPerPage)
         for (const page of blogPagesSplice) {
             // Add Prev/Next buttons to each blog
-            aggregatePages += page[1].getElementById('page-content').innerHTML
+            var documentCopy = page[1].cloneNode(true)
+            let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
+            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
+            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
+            const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
+            while (readMoreParent.nextElementSibling !== null) {
+                readMoreParent.nextElementSibling.remove()
+            }
+            aggregatePages += documentCopy.getElementById('page-content').innerHTML
         }
         const pageContentElement = document.getElementById('page-content')
         pageContentElement.innerHTML = aggregatePages
