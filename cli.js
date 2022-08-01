@@ -232,14 +232,23 @@ async function blogIndex() {
         pageContentElement.innerHTML = aggregatePages
         
         // Add pagination
-        if (pageCount === 1 || pageCount === totalPages) {
-            if (pageCount === 1) {
-                document.getElementById("paginationBegin").setAttribute("class", "muted")
-                document.getElementById("paginationBack").setAttribute("class", "muted")
+        if (pageCount === 1) {
+            document.getElementById("paginationBegin").setAttribute("class", "muted")
+            document.getElementById("paginationBack").setAttribute("class", "muted")
+            if (pageCount !== totalPages) {
+                document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html"><</a>`
+                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html"><</a>`
             }
-            if (pageCount === totalPages) {
-                document.getElementById("paginationForward").setAttribute("class", "muted")
-                document.getElementById("paginationEnd").setAttribute("class", "muted")
+        } else if (pageCount === totalPages) {
+            document.getElementById("paginationForward").setAttribute("class", "muted")
+            document.getElementById("paginationEnd").setAttribute("class", "muted")
+            if (pageCount !== 1) {
+                document.getElementById("paginationBegin").innerHTML = `<a href="/"><</a>`
+                if (pageCount === 2) {
+                    document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
+                } else {
+                    document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
+                }
             }
         } else {
             document.getElementById("paginationBegin").innerHTML = `<a href="/"><</a>`
