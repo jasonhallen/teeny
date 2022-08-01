@@ -187,7 +187,7 @@ async function processPage(pagePath) {
         //     readMoreParent.nextElementSibling.remove()
         // }
         // blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
-        blogPages.push([frontmatter, document])
+        blogPages.push([frontmatter, document, pageName])
         // document.getElementsByClassName("readmore")[0].parentNode.remove()
         return
     }
@@ -198,8 +198,6 @@ async function processPage(pagePath) {
 }
 
 async function blogIndex() {
-
-    document.getElementsByClassName("readmore")[0].parentNode.remove()
 
     // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
@@ -219,16 +217,23 @@ async function blogIndex() {
         var aggregatePages = ""
         var blogPagesSplice = blogPages.splice(0,postsPerPage)
         for (const page of blogPagesSplice) {
-            // Add Prev/Next buttons to each blog
-            var documentCopy = page[1].cloneNode(true)
+            // Create copy of blog page document to be used for index page
+            let documentCopy = page[1].cloneNode(true)
+            // Insert link into H2
             let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
             documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
             documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
             const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
+            // Remove all elements below Read More button
             while (readMoreParent.nextElementSibling !== null) {
                 readMoreParent.nextElementSibling.remove()
             }
+            // Add the HTML to index page
             aggregatePages += documentCopy.getElementById('page-content').innerHTML
+            // Remove Read More button
+            page[1].getElementsByClassName("readmore")[0].parentNode.remove()
+            const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
+            await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
         }
         const pageContentElement = document.getElementById('page-content')
         pageContentElement.innerHTML = aggregatePages
