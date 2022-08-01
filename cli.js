@@ -234,8 +234,14 @@ async function blogIndex() {
         // Add pagination
         if (pageCount === 1) {
             document.getElementById("paginationBegin").setAttribute("class", "muted")
+            document.getElementById("paginationBack").setAttribute("class", "muted")
         } else {
             document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
+            if (pageCount === 2) {
+                document.getElementById("paginationBack").innerHTML = `<a href="/"><<</a>`
+            } else {
+                document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><<</a>`
+            }
         }
         document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
         document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalPages}`
