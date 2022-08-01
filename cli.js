@@ -67,14 +67,6 @@ async function build() {
     await processDirectory('pages')
 }
 
-// 1. Move 'static' files into 'public/' directory
-// 2. Process the 'pages/' directory which contains .md files of all pages
-// 3. Create array of filenames in 'pages' directory
-// 3.a. For each filename, if directory then process directory
-// 3.b. If not directory, process .md file, add promise to array of processPage promises
-// 4. 
-
-
 async function processDirectory(directoryPath) {
     let contents = await fs.readdir(`${directoryPath}/`)
     // console.log(contents)
@@ -202,8 +194,9 @@ async function blogIndex() {
     // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
     
-    let pageCount = 0
-    while (blogPages.length > postsPerPage) {
+    let totalPages = Math.ceil(blogPages.length/postsPerPage)
+    let pageCount = 1
+    while (blogPages.length !== 0) {
         // Slice off the first set of pages
         // Create HTML page
         // If not the first time, create folder, place HTML in that folder
@@ -239,11 +232,11 @@ async function blogIndex() {
         pageContentElement.innerHTML = aggregatePages
         
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
-        if (pageCount === 0) {
+        if (pageCount === 1) {
             await fs.writeFile('public/index.html', finalHtml)
         } else {
             // await safeExecute(async () => await fs.mkdir(`public/${pageCount + 1}`))
-            await fs.writeFile(`public/${pageCount + 1}.html`, finalHtml)
+            await fs.writeFile(`public/${pageCount}.html`, finalHtml)
         }
         pageCount += 1
     }
