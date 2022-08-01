@@ -15,66 +15,18 @@ let blogPages = []
 let postsPerPage = 6
 
 switch (command) {
+    case 'init':
+        init()
+        break
     case 'build':
         build()
         break
     case 'develop':
         develop(scriptArgs[1] ? Number(scriptArgs[1]) : 8000)
         break
-    case 'init':
-        init()
-        break
     default:
         console.log(`Command 'teeny ${command}' does not exist.`)
         process.exit(1)
-}
-
-async function build() {
-    blogPages = []
-    await fs.emptyDir('public/')
-
-    await safeExecute(
-        async () =>
-            // Copy files in 'templates' to 'public' but filter out files that start with '.' or end with '.html'
-            await fs.copy('templates/', 'public/', { filter: (f) => !f.startsWith('.') && !f.endsWith('.html') })
-    )
-    await safeExecute(
-        // Copy files in 'pages' to 'public' but filter out files that start with '.' or end with '.md'
-        async () => await fs.copy('pages/', 'public/', { filter: (f) => !f.startsWith('.') && !f.endsWith('.md') })
-    )
-    let contents = await fs.readdir(`public/blog/`)
-    console.log(contents)
-    // Copy files in 'static' to 'public' but filter out files that start with '.'
-    await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
-
-    await processDirectory('pages')
-}
-
-async function processDirectory(directoryPath) {
-    let contents = await fs.readdir(`${directoryPath}/`)
-    console.log(contents)
-    const processPagePromises = []
-    for (const element of contents) {
-        const isDirectory = (await fs.lstat(`${directoryPath}/${element}`)).isDirectory()
-        if (isDirectory) {
-            await processDirectory(`${directoryPath}/${element}`, processPagePromises)
-            continue
-        }
-        processPagePromises.push(processPage(`${directoryPath}/${element}`))
-    }
-    await Promise.all(processPagePromises)
-    await blogIndex()
-}
-
-async function develop(port) {
-    await build()
-    const server = startServer(port)
-    const watcher = chokidar.watch(['pages/', 'static/', 'templates/']).on('change', async (path, _) => {
-        console.log(`Detected change in file ${path}. Restarting development server.`)
-        server.close()
-        await watcher.close()
-        await develop(port)
-    })
 }
 
 async function init() {
@@ -91,6 +43,47 @@ async function init() {
     await fs.writeFile('templates/homepage.html', exampleTemplate)
     await fs.writeFile('templates/default.html', defaultTemplate)
     await fs.writeFile('static/main.js', exampleStaticAssetJs)
+}
+
+async function build() {
+    blogPages = []
+    await fs.emptyDir('public/')
+
+    await safeExecute(
+        async () =>
+            // Copy files in 'templates' to 'public' but filter out files that start with '.' or end with '.html'
+            await fs.copy('templates/', 'public/', { filter: (f) => !f.startsWith('.') && !f.endsWith('.html') })
+    )
+    await safeExecute(
+        // Copy files in 'pages' to 'public' but filter out files that start with '.' or end with '.md'
+        async () => await fs.copy('pages/', 'public/', { filter: (f) => !f.startsWith('.') && !f.endsWith('.md') })
+    )
+    // Copy files in 'static' to 'public' but filter out files that start with '.'
+    await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
+
+    await processDirectory('pages')
+}
+
+// Create array of blog pages
+// Sort the array in order of date
+// Build each page, including Prev/Next buttons
+// Build index pages with pagination
+
+
+async function processDirectory(directoryPath) {
+    // let contents = await fs.readdir(`${directoryPath}/`)
+    // console.log(contents)
+    const processPagePromises = []
+    for (const element of contents) {
+        const isDirectory = (await fs.lstat(`${directoryPath}/${element}`)).isDirectory()
+        if (isDirectory) {
+            await processDirectory(`${directoryPath}/${element}`, processPagePromises)
+            continue
+        }
+        processPagePromises.push(processPage(`${directoryPath}/${element}`))
+    }
+    await Promise.all(processPagePromises)
+    await blogIndex()
 }
 
 async function processPage(pagePath) {
@@ -158,7 +151,8 @@ async function processPage(pagePath) {
         while (readMoreParent.nextElementSibling !== null) {
             readMoreParent.nextElementSibling.remove()
         }
-        blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
+        // blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
+        blogPages.push([frontmatter, documentCopy])
         document.getElementsByClassName("readmore")[0].parentNode.remove()
     }
 
@@ -186,7 +180,7 @@ async function processPage(pagePath) {
 }
 
 async function blogIndex() {
-
+    // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
     
     let pageCount = 0
@@ -202,9 +196,10 @@ async function blogIndex() {
         headElement[0].innerHTML = componentHead
         
         var aggregatePages = ""
-        var tempBlogPages = blogPages.splice(0,postsPerPage)
-        for (const page of tempBlogPages) {
-            aggregatePages += page[1]
+        var blogPagesSplice = blogPages.splice(0,postsPerPage)
+        for (const page of blogPagesSplice) {
+            // Add Prev/Next buttons to each blog
+            aggregatePages += page[1].getElementById('page-content').innerHTML
         }
         const pageContentElement = document.getElementById('page-content')
         pageContentElement.innerHTML = aggregatePages
@@ -218,9 +213,17 @@ async function blogIndex() {
         }
         pageCount += 1
     }
+}
 
-    
-
+async function develop(port) {
+    await build()
+    const server = startServer(port)
+    const watcher = chokidar.watch(['pages/', 'static/', 'templates/']).on('change', async (path, _) => {
+        console.log(`Detected change in file ${path}. Restarting development server.`)
+        server.close()
+        await watcher.close()
+        await develop(port)
+    })
 }
 
 function startServer(port) {
