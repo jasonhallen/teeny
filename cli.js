@@ -243,7 +243,7 @@ async function blogIndex() {
             }
         } else {
             document.getElementById("paginationBegin").innerHTML = `<a href="/"><</a>`
-            if (pagecount === 2) {
+            if (pageCount === 2) {
                 document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
             } else {
                 document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
