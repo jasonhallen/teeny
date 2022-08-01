@@ -232,15 +232,15 @@ async function blogIndex() {
         pageContentElement.innerHTML = aggregatePages
         
         // Add pagination
-        document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>` 
-        document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>` 
+        if (pageCount === 1) {
+            document.getElementById("paginationBegin").setAttribute("class", "inactive")
+        } else {
+            document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
+        }
+        document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
         document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalPages}`
-        document.getElementById("paginationForward").innerHTML = `<a href="/">></a>` 
-        document.getElementById("paginationEnd").innerHTML = `<a href="/">>></a>` 
-        // paginationPages.setAttribute("class", "muted")
-        // let dateInsert = document.getElementsByTagName("h2")
-        // pageContentElement.parentNode.insertBefore(paginationPages, pageContentElement.nextSibling)
-        // pageContentElement.insertAdjacentElement('beforeend', paginationPages)
+        document.getElementById("paginationForward").innerHTML = `<a href="/">></a>`
+        document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
 
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
         if (pageCount === 1) {
