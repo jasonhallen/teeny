@@ -234,7 +234,7 @@ async function blogIndex() {
         // Add pagination
         document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>` 
         document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>` 
-        document.getElementById("paginationPages").innerHTML = `  ${pageCount} of ${totalPages}  `
+        document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalPages}`
         document.getElementById("paginationForward").innerHTML = `<a href="/">></a>` 
         document.getElementById("paginationEnd").innerHTML = `<a href="/">>></a>` 
         // paginationPages.setAttribute("class", "muted")
