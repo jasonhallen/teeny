@@ -219,6 +219,8 @@ async function blogIndex() {
             }
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
+
+            pageIndex += 1
         }
         const pageContentElement = document.getElementById('page-content')
         pageContentElement.innerHTML = aggregatePages
