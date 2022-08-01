@@ -136,7 +136,7 @@ async function processPage(pagePath) {
     if (frontmatter.date) {
         const calendar = ["January","February","March","April","May","June","July","August","September","October","November","December"]
         let month = calendar[parseInt(frontmatter.date.toString().slice(4,6)) - 1]
-        const day = frontmatter.date.toString().slice(6)
+        const day = frontmatter.date.toString().slice(6).replace(/^0/, "")
         const year = frontmatter.date.toString().slice(0,4)
 
         // Add span element with date string under page heading
@@ -167,20 +167,7 @@ async function processPage(pagePath) {
     }
 
     if (targetPath === "blog") {
-        // Strip everything after READ MORE and push to blogPages
-        // Add link to h2
-        // Add link to REAM MORE
-        // let documentCopy = document.cloneNode(true)
-        // let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
-        // documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="${targetPath}/${pageName}.html">${h2}</a>`
-        // documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `${targetPath}/${pageName}.html`)
-        // const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
-        // while (readMoreParent.nextElementSibling !== null) {
-        //     readMoreParent.nextElementSibling.remove()
-        // }
-        // blogPages.push([frontmatter, documentCopy.getElementById('page-content').innerHTML])
         blogPages.push([frontmatter, document, pageName])
-        // document.getElementsByClassName("readmore")[0].parentNode.remove()
         return
     }
 
