@@ -212,7 +212,7 @@ async function blogIndex() {
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
             
             // Add Prev/Next buttons
-            if (pageIndex !== totalPages) {
+            if (pageIndex !== totalPages - 1) {
                 let nextButton = document.createElement("span")
                 nextButton.innerHTML = `<a href="/" class="readmore">Next</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
