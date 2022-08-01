@@ -183,10 +183,8 @@ async function blogIndex() {
     
     let totalPages = Math.ceil(blogPages.length/postsPerPage)
     let pageCount = 1
+    let postTracker = 0
     while (blogPages.length !== 0) {
-        // Slice off the first set of pages
-        // Create HTML page
-        // If not the first time, create folder, place HTML in that folder
         const dom = await JSDOM.fromFile('templates/blogIndex.html')
         const document = dom.window.document
         
@@ -212,6 +210,15 @@ async function blogIndex() {
             aggregatePages += documentCopy.getElementById('page-content').innerHTML
             // Remove Read More button
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
+            
+            // Add Prev/Next buttons
+            let nextButton = document.createElement("span")
+            nextButton.setAttribute("class", "muted")
+            nextButton.innerHTML = "Next"
+            page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
+            // let dateInsert = document.getElementsByTagName("h2")
+            // dateInsert[0].parentNode.insertBefore(nextButton, dateInsert[0].nextSibling)
+
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
         }
