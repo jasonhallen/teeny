@@ -61,13 +61,13 @@ async function build() {
     // Copy files in 'static' to 'public' but filter out files that start with '.'
     await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
 
+    let contents = await fs.readdir('public')
+    // console.log(contents)
+
     await processDirectory('pages')
 }
 
-// Create array of blog pages
-// Sort the array in order of date
-// Build each page, including Prev/Next buttons
-// Build index pages with pagination
+// 1. Move template
 
 
 async function processDirectory(directoryPath) {
