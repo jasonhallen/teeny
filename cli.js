@@ -231,6 +231,13 @@ async function blogIndex() {
         const pageContentElement = document.getElementById('page-content')
         pageContentElement.innerHTML = aggregatePages
         
+        // Add pagination
+        let paginationSpan = document.createElement("span")
+        paginationSpan.setAttribute("class", "muted")
+        paginationSpan.innerHTML = `Page ${pageCount} of ${totalPages}`
+        // let dateInsert = document.getElementsByTagName("h2")
+        pageContentElement.parentNode.insertBefore(paginationSpan, pageContentElement.nextSibling)
+
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
         if (pageCount === 1) {
             await fs.writeFile('public/index.html', finalHtml)
