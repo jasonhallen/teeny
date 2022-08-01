@@ -213,8 +213,7 @@ async function blogIndex() {
             
             // Add Prev/Next buttons
             let nextButton = document.createElement("span")
-            nextButton.setAttribute("class", "muted")
-            nextButton.innerHTML = `<a href="/">Next</a>`
+            nextButton.innerHTML = `<a href="/" class="readmore">Next</a>`
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
             // let dateInsert = document.getElementsByTagName("h2")
             // dateInsert[0].parentNode.insertBefore(nextButton, dateInsert[0].nextSibling)
