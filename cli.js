@@ -62,7 +62,7 @@ async function build() {
     await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
 
     let contents = await fs.readdir('public')
-    // console.log(contents)
+    console.log(contents)
 
     await processDirectory('pages')
 }
