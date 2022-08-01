@@ -233,7 +233,7 @@ async function blogIndex() {
         
         // Add pagination
         if (pageCount === 1) {
-            document.getElementById("paginationBegin").setAttribute("class", "inactive")
+            document.getElementById("paginationBegin").setAttribute("class", "muted")
         } else {
             document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
         }
