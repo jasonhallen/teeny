@@ -200,7 +200,7 @@ async function blogIndex() {
         // Slice off the first set of pages
         // Create HTML page
         // If not the first time, create folder, place HTML in that folder
-        const dom = await JSDOM.fromFile('templates/index.html')
+        const dom = await JSDOM.fromFile('templates/blogIndex.html')
         const document = dom.window.document
         
         const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
@@ -232,12 +232,12 @@ async function blogIndex() {
         pageContentElement.innerHTML = aggregatePages
         
         // Add pagination
-        let paginationSpan = document.createElement("span")
-        paginationSpan.setAttribute("class", "muted")
-        paginationSpan.innerHTML = `<a href=""><<  </a> <a href=""><  </a>  ${pageCount} of ${totalPages}  <a href="">>  </a><a href="">>></a>`
+        let paginationPages = document.getElementById("paginationPages")
+        // paginationPages.setAttribute("class", "muted")
+        paginationPages.innerHTML = `${pageCount} of ${totalPages}`
         // let dateInsert = document.getElementsByTagName("h2")
-        // pageContentElement.parentNode.insertBefore(paginationSpan, pageContentElement.nextSibling)
-        pageContentElement.insertAdjacentElement('beforeend', paginationSpan)
+        // pageContentElement.parentNode.insertBefore(paginationPages, pageContentElement.nextSibling)
+        // pageContentElement.insertAdjacentElement('beforeend', paginationPages)
 
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
         if (pageCount === 1) {
