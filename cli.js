@@ -181,7 +181,8 @@ async function blogIndex() {
     // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
     
-    let totalPages = Math.ceil(blogPages.length/postsPerPage)
+    let totalBlogPages = blogPages.length
+    let totalIndexPages = Math.ceil(blogPages.length/postsPerPage)
     let pageCount = 1
     let pageIndex = 0
     while (blogPages.length !== 0) {
@@ -212,7 +213,9 @@ async function blogIndex() {
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
             
             // Add Prev/Next buttons
-            if (pageIndex !== blogPages.length - 1) {
+            console.log(pageIndex)
+            console.log(blogPages.length)
+            if (pageIndex !== totalBlogPages - 1) {
                 let nextButton = document.createElement("span")
                 nextButton.innerHTML = `<a href="/" class="readmore">Next</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', nextButton);
@@ -229,12 +232,12 @@ async function blogIndex() {
         if (pageCount === 1) {
             document.getElementById("paginationBegin").setAttribute("class", "muted")
             document.getElementById("paginationBack").setAttribute("class", "muted")
-            if (pageCount !== totalPages) {
+            if (pageCount !== totalIndexPages) {
                 document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
-                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
+                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalIndexPages}.html">>></a>`
             }
         }
-        if (pageCount === totalPages) {
+        if (pageCount === totalIndexPages) {
             document.getElementById("paginationForward").setAttribute("class", "muted")
             document.getElementById("paginationEnd").setAttribute("class", "muted")
             if (pageCount !== 1) {
@@ -246,7 +249,7 @@ async function blogIndex() {
                 }
             }
         }
-        if (pageCount !== 1 && pageCount !== totalPages) {
+        if (pageCount !== 1 && pageCount !== totalIndexPages) {
             document.getElementById("paginationBegin").innerHTML = `<a href="/"><<</a>`
             if (pageCount === 2) {
                 document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
@@ -254,9 +257,9 @@ async function blogIndex() {
                 document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
             }
             document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
-            document.getElementById("paginationEnd").innerHTML = `<a href="/${totalPages}.html">>></a>`
+            document.getElementById("paginationEnd").innerHTML = `<a href="/${totalIndexPages}.html">>></a>`
         }
-        document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalPages}`
+        document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalIndexPages}`
 
 
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
