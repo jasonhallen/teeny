@@ -113,14 +113,6 @@ async function processPage(pagePath) {
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = componentHead
 
-    // const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
-    // const headerElement = document.getElementById('header')
-    // headerElement.innerHTML = componentHeader
-    
-    // const componentNav = await fs.readFile('templates/component_nav.html', 'utf-8')
-    // const navElement = document.getElementById('nav')
-    // navElement.innerHTML = componentNav
-
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
     const pageContentElement = document.getElementById('page-content')
@@ -203,8 +195,8 @@ async function blogIndex() {
             let documentCopy = page[1].cloneNode(true)
             // Insert link into H2
             let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
-            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="/blog/${page[2]}.html">${h2}</a>`
-            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `/blog/${page[2]}.html`)
+            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="/blog/${page[2]}">${h2}</a>`
+            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `/blog/${page[2]}`)
             const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
             // Remove all elements below Read More button
             while (readMoreParent.nextElementSibling !== null) {
@@ -218,12 +210,12 @@ async function blogIndex() {
             // Add Prev/Next buttons
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
-                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}.html" class="readmore floatleft">Newer</a>`
+                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}" class="readmore floatleft">Newer</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', newerButton);
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let olderButton = document.createElement("span")
-                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}.html" class="readmore floatright">Older</a>`
+                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore floatright">Older</a>`
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton);
             }
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
@@ -239,8 +231,8 @@ async function blogIndex() {
             document.getElementById("paginationBegin").setAttribute("class", "muted")
             document.getElementById("paginationBack").setAttribute("class", "muted")
             if (pageCount !== totalIndexPages) {
-                document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
-                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalIndexPages}.html">>></a>`
+                document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}">></a>`
+                document.getElementById("paginationEnd").innerHTML = `<a href="/${totalIndexPages}">>></a>`
             }
         }
         if (pageCount === totalIndexPages) {
@@ -251,7 +243,7 @@ async function blogIndex() {
                 if (pageCount === 2) {
                     document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
                 } else {
-                    document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
+                    document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}"><</a>`
                 }
             }
         }
@@ -260,10 +252,10 @@ async function blogIndex() {
             if (pageCount === 2) {
                 document.getElementById("paginationBack").innerHTML = `<a href="/"><</a>`
             } else {
-                document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}.html"><</a>`
+                document.getElementById("paginationBack").innerHTML = `<a href="/${pageCount - 1}"><</a>`
             }
-            document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}.html">></a>`
-            document.getElementById("paginationEnd").innerHTML = `<a href="/${totalIndexPages}.html">>></a>`
+            document.getElementById("paginationForward").innerHTML = `<a href="/${pageCount + 1}">></a>`
+            document.getElementById("paginationEnd").innerHTML = `<a href="/${totalIndexPages}">>></a>`
         }
         document.getElementById("paginationPages").innerHTML = `${pageCount} of ${totalIndexPages}`
 
