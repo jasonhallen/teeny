@@ -83,6 +83,7 @@ async function processDirectory(directoryPath) {
     }
     await Promise.all(processPagePromises)
     await blogIndex()
+    await fs.writeFile('public/CNAME', 'www.jasonhallen.com')
 }
 
 async function processPage(pagePath) {
