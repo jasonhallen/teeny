@@ -112,7 +112,7 @@ async function processPage(pagePath) {
     // Insert the "component_head" template into "head" element of document
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
     const headElement = document.getElementsByTagName('head')
-    headElement[0].innerHTML = componentHead
+    headElement[0].innerHTML = componentHead + headElement[0].innerHTML
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
