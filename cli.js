@@ -136,7 +136,7 @@ async function processPage(pagePath) {
 
         // Add span element with date string under page heading
         let dateSpan = document.createElement("span")
-        dateSpan.setAttribute("class", "muted")
+        dateSpan.setAttribute("class", "muted date")
         dateSpan.innerHTML = month + " " + day + ", " + year
         let dateInsert = document.getElementsByTagName("h2")
         dateInsert[0].parentNode.insertBefore(dateSpan, dateInsert[0].nextSibling)
