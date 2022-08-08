@@ -12,7 +12,7 @@ const fm = require('front-matter')
 const scriptArgs = process.argv.slice(2)
 const command = scriptArgs[0]
 let blogPages = []
-let postsPerPage = 10
+let postsPerPage = 8
 
 switch (command) {
     case 'init':
