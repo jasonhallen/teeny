@@ -109,10 +109,16 @@ async function processPage(pagePath) {
     const pagePathParts = pagePath.replace('pages/', '').split('/')
     const pageName = pagePathParts.pop().split('.md')[0]
     const targetPath = pagePathParts.join('/')
+
     // Insert the "component_head" template into "head" element of document
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
     const headElement = document.getElementsByTagName('head')
-    headElement[0].innerHTML = componentHead + headElement[0].innerHTML
+    headElement[0].innerHTML = headElement[0].innerHTML + componentHead
+
+    if (frontmatter.keywords) {
+        let keywords = headElement[0].getElementsByTagName("meta").keywords
+         keywords.content = keywords.content + ', ' + frontmatter.keywords
+    }
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
