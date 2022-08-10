@@ -117,9 +117,12 @@ async function processPage(pagePath) {
 
     if (frontmatter.keywords) {
         let keywords = headElement[0].getElementsByTagName("meta").keywords
-         keywords.content = keywords.content + ', ' + frontmatter.keywords
+        keywords.content = keywords.content + ', ' + frontmatter.keywords
     }
 
+    if (frontmatter.description) {
+
+    }
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
     const pageContentElement = document.getElementById('page-content')
@@ -181,13 +184,19 @@ async function blogIndex() {
 
     // Sort blog pages by most recent Date field
     blogPages.sort(function(a, b){return b[0].date - a[0].date})
-    
+
+    // Read raw text of .md file
+    const fileData = await fs.readFile("pages/.blogIndex.md", 'utf-8')
+    // Parse raw text into frontmatter and markdown
+    const { attributes: frontmatter, body: markdown } = await fm(fileData)
+
     let originalBlogPages = Array.from(blogPages)
     let totalBlogPages = blogPages.length
     let totalIndexPages = Math.ceil(blogPages.length/postsPerPage)
     let pageCount = 1
     let pageIndex = 0
     while (blogPages.length !== 0) {
+
         const dom = await JSDOM.fromFile('templates/blogIndex.html')
         const document = dom.window.document
         
@@ -195,7 +204,7 @@ async function blogIndex() {
         const headElement = document.getElementsByTagName('head')
         headElement[0].innerHTML = componentHead
 
-        document.title = "Jason Hallen"
+        document.title = frontmatter.title
         
         var aggregatePages = ""
         var blogPagesSplice = blogPages.splice(0,postsPerPage)
