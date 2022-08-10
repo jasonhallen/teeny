@@ -188,6 +188,8 @@ async function blogIndex() {
         const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
         const headElement = document.getElementsByTagName('head')
         headElement[0].innerHTML = componentHead
+
+        document.title = "Jason Hallen"
         
         var aggregatePages = ""
         var blogPagesSplice = blogPages.splice(0,postsPerPage)
@@ -265,7 +267,6 @@ async function blogIndex() {
         if (pageCount === 1) {
             await fs.writeFile('public/index.html', finalHtml)
         } else {
-            // await safeExecute(async () => await fs.mkdir(`public/${pageCount + 1}`))
             await fs.writeFile(`public/${pageCount}.html`, finalHtml)
         }
         pageCount += 1
