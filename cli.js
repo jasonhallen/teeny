@@ -115,14 +115,18 @@ async function processPage(pagePath) {
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = headElement[0].innerHTML + componentHead
 
+    // Append page keywords to default website keywords
     if (frontmatter.keywords) {
         let keywords = headElement[0].getElementsByTagName("meta").keywords
         keywords.content = keywords.content + ', ' + frontmatter.keywords
     }
 
+    // Add description to meta element
     if (frontmatter.description) {
-
+        let description = headElement[0].getElementsByTagName("meta").description
+        description.content = frontmatter.description        
     }
+
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
     const pageContentElement = document.getElementById('page-content')
@@ -204,8 +208,14 @@ async function blogIndex() {
         const headElement = document.getElementsByTagName('head')
         headElement[0].innerHTML = componentHead
 
+        // Add description to meta element
+        if (frontmatter.description) {
+            let description = headElement[0].getElementsByTagName("meta").description
+            description.content = frontmatter.description        
+        }
+     
         document.title = frontmatter.title
-        
+
         var aggregatePages = ""
         var blogPagesSplice = blogPages.splice(0,postsPerPage)
         for (const page of blogPagesSplice) {
