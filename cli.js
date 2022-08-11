@@ -131,10 +131,10 @@ async function processPage(pagePath) {
 
     // Add H2 title and cover image
     if (frontmatter.image && !frontmatter.imageCaption) {
-        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'></figure>\n\n` + markdown
+        markdown = `<figure><img class="cover-image" src='${frontmatter.image}' alt='${frontmatter.imageAlt}'></figure>\n\n` + markdown
     }
     if (frontmatter.image && frontmatter.imageCaption) {
-        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>\n\n` + markdown
+        markdown = `<figure><img class="cover-image" src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>\n\n` + markdown
     }
     if (frontmatter.title) {
         document.title = frontmatter.title
@@ -228,6 +228,10 @@ async function blogIndex() {
             // Insert link into H2
             let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
             documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="/blog/${page[2]}">${h2}</a>`
+            if (documentCopy.getElementsByClassName("cover-image")[0]) {
+                let coverImage = documentCopy.getElementsByClassName("cover-image")[0]
+                coverImage.outerHTML = `<a href="/blog/${page[2]}">${coverImage.outerHTML}</a>`
+            }
             documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `/blog/${page[2]}`)
             const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
             // Remove all elements below Read More button
