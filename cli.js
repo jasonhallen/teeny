@@ -124,14 +124,26 @@ async function processPage(pagePath) {
     // Add description to meta element
     if (frontmatter.description) {
         let description = headElement[0].getElementsByTagName("meta").description
-        description.content = frontmatter.description        
+        description.content = frontmatter.description
+    }
+
+    // Add H2 title and cover image
+    if (frontmatter.image && !frontmatter.image-caption) {
+        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.image-alt}'></figure>` + markdown
+    }
+    if (frontmatter.image && frontmatter.image-caption) {
+        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.image-alt}'><figcaption>${frontmatter.image-caption}</figcaption></figure>` + markdown
+    }
+    if (frontmatter.title) {
+        document.title = frontmatter.title
+        markdown = `<h2>${frontmatter.title}</h2>` + markdown
     }
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
-    const pageContentElement = document.getElementById('page-content')
-
+    
     // Add .md HTML to the "page-content" div in the document
+    const pageContentElement = document.getElementById('page-content')
     if (pageContentElement) {
         pageContentElement.innerHTML = parsedHtml
     } else {
@@ -160,18 +172,6 @@ async function processPage(pagePath) {
     if (!wrapperHtmlElement.length) {
         console.log(`Templates should contain the 'html' tag.`)
         process.exit(1)
-    }
-
-    let title = frontmatter.title
-    if (!title) {
-        const h1s = document.getElementsByTagName('h1')
-        if (h1s.length) {
-            title = h1s[0].innerHTML
-        }
-    }
-
-    if (title) {
-        document.title = title
     }
 
     if (targetPath === "blog") {
