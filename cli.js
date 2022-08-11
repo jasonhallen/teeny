@@ -91,7 +91,7 @@ async function processPage(pagePath) {
     // Read raw text of .md file
     const fileData = await fs.readFile(pagePath, 'utf-8')
     // Parse raw text into frontmatter and markdown
-    const { attributes: frontmatter, body: markdown } = await fm(fileData)
+    let { attributes: frontmatter, body: markdown } = await fm(fileData)
 
     // Skip page is set to "publish: no"
     if (frontmatter.publish === "no") {
