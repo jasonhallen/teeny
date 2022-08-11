@@ -131,14 +131,14 @@ async function processPage(pagePath) {
 
     // Add H2 title and cover image
     if (frontmatter.image && !frontmatter.imageCaption) {
-        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'></figure>` + markdown
+        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'></figure>\n\n` + markdown
     }
     if (frontmatter.image && frontmatter.imageCaption) {
-        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>` + markdown
+        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>\n\n` + markdown
     }
     if (frontmatter.title) {
         document.title = frontmatter.title
-        markdown = `<h2>${frontmatter.title}</h2>` + markdown
+        markdown = `<h2>${frontmatter.title}</h2>\n\n` + markdown
     }
     markdown.replace('[READ MORE]', `<a class="readmore" href="/">Read more</a>`)
     console.log(markdown)
