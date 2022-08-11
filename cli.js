@@ -93,6 +93,8 @@ async function processPage(pagePath) {
     // Parse raw text into frontmatter and markdown
     let { attributes: frontmatter, body: markdown } = await fm(fileData)
 
+    console.log(markdown)
+
     // Skip page is set to "publish: no"
     if (frontmatter.publish === "no") {
         return
@@ -139,6 +141,7 @@ async function processPage(pagePath) {
         markdown = `<h2>${frontmatter.title}</h2>` + markdown
     }
     markdown.replace('[READ MORE]', `<a class="readmore" href="/">Read more</a>`)
+    console.log(markdown)
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
