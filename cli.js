@@ -299,6 +299,7 @@ async function blogIndex() {
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
         if (pageCount === 1) {
             await fs.writeFile('public/index.html', finalHtml)
+            await fs.writeFile('public/blog.html', finalHtml)
         } else {
             await fs.writeFile(`public/${pageCount}.html`, finalHtml)
         }
