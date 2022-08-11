@@ -138,6 +138,7 @@ async function processPage(pagePath) {
         document.title = frontmatter.title
         markdown = `<h2>${frontmatter.title}</h2>` + markdown
     }
+    // markdown.replace('[READ MORE]', `<a class="readmore" href="">Read more</a>`)
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
@@ -217,7 +218,7 @@ async function blogIndex() {
         document.title = frontmatter.title
 
         var aggregatePages = ""
-        var blogPagesSplice = blogPages.splice(0,postsPerPage)
+        var blogPagesSplice = blogPages.splice(0, postsPerPage)
         for (const page of blogPagesSplice) {
             // Create copy of blog page document to be used for index page
             let documentCopy = page[1].cloneNode(true)
