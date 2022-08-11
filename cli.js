@@ -140,7 +140,7 @@ async function processPage(pagePath) {
         document.title = frontmatter.title
         markdown = `<h2>${frontmatter.title}</h2>\n\n` + markdown
     }
-    markdown.replace("[READ MORE]", `<a class="readmore" href="/">Read more</a>`)
+    markdown = markdown.replace("[READ MORE]", `<a class="readmore" href="/">Read more</a>`)
     console.log(markdown)
 
     // Convert .md markdown into HTML
