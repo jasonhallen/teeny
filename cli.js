@@ -128,11 +128,11 @@ async function processPage(pagePath) {
     }
 
     // Add H2 title and cover image
-    if (frontmatter.image && !frontmatter.image-caption) {
-        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.image-alt}'></figure>` + markdown
+    if (frontmatter.image && !frontmatter.imageCaption) {
+        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'></figure>` + markdown
     }
-    if (frontmatter.image && frontmatter.image-caption) {
-        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.image-alt}'><figcaption>${frontmatter.image-caption}</figcaption></figure>` + markdown
+    if (frontmatter.image && frontmatter.imageCaption) {
+        markdown = `<figure><img src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>` + markdown
     }
     if (frontmatter.title) {
         document.title = frontmatter.title
