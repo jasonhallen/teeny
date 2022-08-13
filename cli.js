@@ -240,6 +240,8 @@ async function blogIndex() {
             }
             // Add the HTML to index page
             aggregatePages += documentCopy.getElementById('page-content').innerHTML
+            
+            // BUILD INDIVIDUAL BLOG POST
             // Remove Read More button
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
             
@@ -247,13 +249,21 @@ async function blogIndex() {
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
                 newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}" class="readmore floatleft">Newer</a>`
-                page[1].getElementById("page-content").insertAdjacentElement('beforeend', newerButton);
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', newerButton)
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let olderButton = document.createElement("span")
                 olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore floatright">Older</a>`
-                page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton);
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton)
             }
+
+            // Add comment form
+            const componentCommentForm = await fs.readFile('templates/component_comment_form.html', 'utf-8')
+            let commentFormDiv = document.createElement("div")
+            commentFormDiv.setAttribute("id"="comment-form")
+            commentFormDiv.innerHTML = componentCommentForm
+            page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
+
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
 
