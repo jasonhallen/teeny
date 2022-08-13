@@ -260,7 +260,7 @@ async function blogIndex() {
             // Add comment form
             const componentCommentForm = await fs.readFile('templates/component_comment_form.html', 'utf-8')
             let commentFormDiv = document.createElement("div")
-            commentFormDiv.setAttribute("id"="comment-form")
+            commentFormDiv.setAttribute("id", "comment-form")
             commentFormDiv.innerHTML = componentCommentForm
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
 
