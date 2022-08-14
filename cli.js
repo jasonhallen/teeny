@@ -256,11 +256,14 @@ async function blogIndex() {
 
             // Add comment form
             const componentCommentForm = await fs.readFile('templates/component_comment_form.html', 'utf-8')
+            componentCommentForm.replace("{{ absolute_url }}", `https://jasonhallen.com/blog/${page[2]}.html`)
+            componentCommentForm.replace("{{ slug }}", page[2])
             let commentFormDiv = document.createElement("div")
             commentFormDiv.setAttribute("id", "comment-form")
             commentFormDiv.innerHTML = componentCommentForm
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
 
+            // Save individual blog post as HTML file
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
 
