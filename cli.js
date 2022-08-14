@@ -62,7 +62,7 @@ async function build() {
     await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
 
     let contents = await fs.readdir('public')
-    console.log(contents)
+    // console.log(contents)
 
     await processDirectory('pages')
 }
@@ -92,8 +92,6 @@ async function processPage(pagePath) {
     const fileData = await fs.readFile(pagePath, 'utf-8')
     // Parse raw text into frontmatter and markdown
     let { attributes: frontmatter, body: markdown } = await fm(fileData)
-
-    console.log(markdown)
 
     // Skip page is set to "publish: no"
     if (frontmatter.publish === "no") {
@@ -141,7 +139,6 @@ async function processPage(pagePath) {
         markdown = `<h2>${frontmatter.title}</h2>\n\n` + markdown
     }
     markdown = markdown.replace("[READ MORE]", `<a class="readmore" href="/">Read more</a>`)
-    console.log(markdown)
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
