@@ -258,7 +258,6 @@ async function blogIndex() {
             let componentCommentForm = await fs.readFile('templates/component_comment_form.html', 'utf-8')
             componentCommentForm = componentCommentForm.replace("{{ absolute_url }}", `https://jasonhallen.com/blog/${page[2]}.html`)
             componentCommentForm = componentCommentForm.replace("{{ slug }}", page[2])
-            console.log(componentCommentForm)
             let commentFormDiv = document.createElement("div")
             commentFormDiv.setAttribute("id", "comment-form")
             commentFormDiv.innerHTML = componentCommentForm
