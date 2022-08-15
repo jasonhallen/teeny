@@ -258,8 +258,6 @@ async function blogIndex() {
             // Add comments
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
                 let componentComment = await fs.readFile('templates/component_comment.html', 'utf-8')
-                // const dom = await JSDOM.fromFile('templates/component_comment.html').window
-                // console.log(dom.document)
                 let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
                 let commentListDiv = document.createElement("div")
                 commentListDiv.setAttribute("id", "comment-list")
@@ -269,10 +267,14 @@ async function blogIndex() {
                     const ymlData = fs.readFileSync(`static/comments/${page[2]}/${ymlFile}`, 'utf-8')
                     // Parse YML file
                     ymlParsed = yaml.parse(ymlData)
+                    console.log(ymlParsed)
                     // Insert comment data into template
-                    let commentDiv = document.createElement("div")
-                    commentDiv.innerHTML = componentComment
-                    commentListDiv.insertAdjacentElement('beforeend', commentDiv)
+                    let commentArticle = document.createElement("article")
+                    commentArticle.setAttribute("id", "")
+                    commentArticle.setAttribute("class", "comment")
+                    commentArticle.setAttribute("uid", "")
+                    commentArticle.innerHTML = componentComment
+                    commentListDiv.insertAdjacentElement('beforeend', commentArticle)
                     
                     // Insert comment element in DOM
                 })
@@ -287,7 +289,7 @@ async function blogIndex() {
             commentFormDiv.setAttribute("id", "comment-form")
             commentFormDiv.innerHTML = componentCommentForm
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
-            
+
             // Save individual blog post as HTML file
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
