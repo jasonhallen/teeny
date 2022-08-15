@@ -261,7 +261,7 @@ async function blogIndex() {
                 let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
                 let commentListDiv = document.createElement("div")
                 commentListDiv.setAttribute("id", "comment-list")
-                commentListDiv.innerHTML = "<h2>Comments</h2>"
+                commentListDiv.innerHTML = "<hr><h2>Comments</h2>"
                 commentsList.forEach(ymlFile => {
                     // Read YML file
                     const ymlData = fs.readFileSync(`static/comments/${page[2]}/${ymlFile}`, 'utf-8')
@@ -274,7 +274,7 @@ async function blogIndex() {
                     commentArticle.setAttribute("class", "comment")
                     commentArticle.setAttribute("uid", ymlParsed._id)
                     commentArticle.innerHTML = componentComment
-                    commentArticle.getElementsByClassName("comment-author")[0].innerHTML = ymlParsed.name + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
+                    commentArticle.getElementsByClassName("comment-author")[0].innerHTML = `<h3>${ymlParsed.name}</h3>` + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
                     commentArticle.getElementsByClassName("comment-link")[0].setAttribute("href", `#comment-${ymlParsed._id}`)
                     let date = new Date(ymlParsed.date).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric',})
                     let time = new Date(ymlParsed.date).toLocaleTimeString('default', {timeStyle: "short"})
