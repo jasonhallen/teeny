@@ -6,6 +6,7 @@ const marked = require('marked')
 const http = require('http')
 const chokidar = require('chokidar')
 const fm = require('front-matter')
+const yaml = require('yaml')
 
 // attributes: { template: "custom.html" }
 // body: "# My normal markdown ..."
@@ -265,8 +266,15 @@ async function blogIndex() {
 
             // Add comments
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
-                let comments = await fs.readdir(`static/comments/${page[2]}/`)
-                console.log(comments)
+                let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
+                for (ymlFile in commentsList) {
+                    // Parse YML file
+                    parsedYml = yaml.parse(`static/comments/${page[2]}/${ymlFile}`)
+                    console.log(parsedYml)
+                    // Copy comment template
+                    // Insert comment data into template
+                    // Insert comment element in DOM
+                }
             }
 
             // Save individual blog post as HTML file
