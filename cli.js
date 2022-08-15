@@ -268,7 +268,7 @@ async function blogIndex() {
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
                 let componentComment = await fs.readFile('templates/component_comment.html', 'utf-8')
                 const dom = await JSDOM.fromFile('templates/component_comment.html').window
-                console.log(dom)
+                console.log(dom.document)
                 let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
                 let commentListDiv = document.createElement("div")
                 commentListDiv.setAttribute("id", "comment-list")
