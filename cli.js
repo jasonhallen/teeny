@@ -277,7 +277,7 @@ async function blogIndex() {
                     commentArticle.getElementsByClassName("comment-author")[0].innerHTML = ymlParsed.name + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
                     commentArticle.getElementsByClassName("comment-link")[0].setAttribute("href", `#comment-${ymlParsed._id}`)
                     let date = new Date(ymlParsed.date).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric',})
-                    let time = new Date(ymlParsed.date).toLocaleTimeString('default'})
+                    let time = new Date(ymlParsed.date).toLocaleTimeString('default')})
                     commentArticle.getElementsByClassName("comment-link")[0].innerHTML = `${date} at ${time}`
 
                     commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message)
