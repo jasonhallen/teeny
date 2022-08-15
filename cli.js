@@ -271,7 +271,7 @@ async function blogIndex() {
                     // Insert comment data into template
                     let commentArticle = document.createElement("article")
                     commentArticle.setAttribute("id", `comment-${ymlParsed._id}`)
-                    commentArticle.setAttribute("class", "comment")
+                    commentArticle.setAttribute("class", "comment-article")
                     commentArticle.setAttribute("uid", ymlParsed._id)
                     commentArticle.innerHTML = componentComment
                     commentArticle.getElementsByClassName("comment-author")[0].innerHTML = ymlParsed.name + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
