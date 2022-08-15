@@ -267,8 +267,8 @@ async function blogIndex() {
             // Add comments
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
                 let componentComment = await fs.readFile('templates/component_comment.html', 'utf-8')
-                const dom = await JSDOM.fromFile('templates/component_comment.html').window
-                console.log(dom.document)
+                // const dom = await JSDOM.fromFile('templates/component_comment.html').window
+                // console.log(dom.document)
                 let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
                 let commentListDiv = document.createElement("div")
                 commentListDiv.setAttribute("id", "comment-list")
@@ -278,8 +278,13 @@ async function blogIndex() {
                     // Parse YML file
                     ymlParsed = yaml.parse(ymlData)
                     // Insert comment data into template
+                    let commentDiv = document.createElement("div")
+                    commentDiv.innerHTML = componentComment
+                    commentListDiv.insertAdjacentElement('beforeend', commentDiv)
+                    
                     // Insert comment element in DOM
                 })
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentListDiv)
             }
 
             // Save individual blog post as HTML file
