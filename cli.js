@@ -268,9 +268,11 @@ async function blogIndex() {
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
                 let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
                 for (ymlFile in commentsList) {
+                    // Read YML file
+                    const ymlData = await fs.readFile(`static/comments/${page[2]}/${ymlFile}`, 'utf-8')
                     // Parse YML file
-                    parsedYml = yaml.parse(`static/comments/${page[2]}/${ymlFile}`)
-                    console.log(parsedYml)
+                    ymlParsed = yaml.parse(ymlData)
+                    console.log(ymlParsed)
                     // Copy comment template
                     // Insert comment data into template
                     // Insert comment element in DOM
