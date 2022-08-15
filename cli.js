@@ -278,7 +278,7 @@ async function blogIndex() {
                     commentArticle.getElementsByClassName("comment-link")[0].setAttribute("href", `#comment-${ymlParsed._id}`)
                     commentArticle.getElementsByClassName("comment-link")[0].innerHTML = ymlParsed.date
                     let testDate = new Date(ymlParsed.date)
-                    console.log(testDate)
+                    console.log(testDate.toLocaleString('default', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',}))
                     commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message)
                     commentListDiv.insertAdjacentElement('beforeend', commentArticle)
                     
