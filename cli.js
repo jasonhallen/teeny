@@ -255,15 +255,6 @@ async function blogIndex() {
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton)
             }
 
-            // Add comment form
-            let componentCommentForm = await fs.readFile('templates/component_comment_form.html', 'utf-8')
-            componentCommentForm = componentCommentForm.replace("{{ absolute_url }}", `https://jasonhallen.com/blog/${page[2]}.html`)
-            componentCommentForm = componentCommentForm.replace("{{ slug }}", page[2])
-            let commentFormDiv = document.createElement("div")
-            commentFormDiv.setAttribute("id", "comment-form")
-            commentFormDiv.innerHTML = componentCommentForm
-            page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
-
             // Add comments
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
                 let componentComment = await fs.readFile('templates/component_comment.html', 'utf-8')
@@ -288,6 +279,15 @@ async function blogIndex() {
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentListDiv)
             }
 
+            // Add comment form
+            let componentCommentForm = await fs.readFile('templates/component_comment_form.html', 'utf-8')
+            componentCommentForm = componentCommentForm.replace("{{ absolute_url }}", `https://jasonhallen.com/blog/${page[2]}.html`)
+            componentCommentForm = componentCommentForm.replace("{{ slug }}", page[2])
+            let commentFormDiv = document.createElement("div")
+            commentFormDiv.setAttribute("id", "comment-form")
+            commentFormDiv.innerHTML = componentCommentForm
+            page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
+            
             // Save individual blog post as HTML file
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
             await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
