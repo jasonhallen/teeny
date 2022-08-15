@@ -273,6 +273,7 @@ async function blogIndex() {
                     commentArticle.setAttribute("id", `comment-${ymlParsed._id}`)
                     commentArticle.setAttribute("class", "comment")
                     commentArticle.setAttribute("uid", ymlParsed._id)
+                    commentArticle.getElementsByClassName("comment-author")[0].innerHTML = ymlParsed.name + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
                     commentArticle.innerHTML = componentComment
                     commentListDiv.insertAdjacentElement('beforeend', commentArticle)
                     
