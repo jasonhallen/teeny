@@ -274,7 +274,7 @@ async function blogIndex() {
                     commentArticle.setAttribute("class", "comment")
                     commentArticle.setAttribute("uid", ymlParsed._id)
                     commentArticle.innerHTML = componentComment
-                    commentArticle.getElementsByClassName("comment-author")[0].innerHTML = `<h3>${ymlParsed.name}</h3>` + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
+                    commentArticle.getElementsByClassName("comment-author")[0].innerHTML = ymlParsed.name + commentArticle.getElementsByClassName("comment-author")[0].innerHTML
                     commentArticle.getElementsByClassName("comment-link")[0].setAttribute("href", `#comment-${ymlParsed._id}`)
                     let date = new Date(ymlParsed.date).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric',})
                     let time = new Date(ymlParsed.date).toLocaleTimeString('default', {timeStyle: "short"})
