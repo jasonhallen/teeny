@@ -261,7 +261,7 @@ async function blogIndex() {
                 let commentsList = await fs.readdir(`static/comments/${page[2]}/`)
                 let commentListDiv = document.createElement("div")
                 commentListDiv.setAttribute("id", "comment-list")
-                commentListDiv.innerHTML = "<hr><h2>Comments</h2>"
+                commentListDiv.innerHTML = "<h2>Comments</h2>"
                 commentsList.forEach(ymlFile => {
                     // Read YML file
                     const ymlData = fs.readFileSync(`static/comments/${page[2]}/${ymlFile}`, 'utf-8')
