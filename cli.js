@@ -280,11 +280,11 @@ async function blogIndex() {
                     // Insert comment data into template
                     let commentDiv = document.createElement("div")
                     commentDiv.innerHTML = componentComment
-                    // commentListDiv.insertAdjacentElement('beforeend', commentDiv)
+                    commentListDiv.insertAdjacentElement('beforeend', commentDiv)
                     
                     // Insert comment element in DOM
                 })
-                // page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentListDiv)
+                page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentListDiv)
             }
 
             // Save individual blog post as HTML file
