@@ -265,8 +265,10 @@ async function blogIndex() {
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
 
             // Add comments
-            let comments = await fs.readdir(`static/comments/${page[2]}/`)
-            console.log(comments)
+            if (fs.existsSync(`static/comments/${page[2]}/`)) {
+                let comments = await fs.readdir(`static/comments/${page[2]}/`)
+                console.log(comments)
+            }
 
             // Save individual blog post as HTML file
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
