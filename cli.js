@@ -286,6 +286,7 @@ async function blogIndex() {
                     commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message)
                     
                     if (!ymlParsed.replying_to_uid) {
+                        commentArticle.getElementsByClassName("comment-reply-link")[0].innerHTML = `Reply to ${ymlParsed.name}`
                         commentArticle.getElementsByClassName("comment-reply-link")[0].setAttribute("onclick", 
                         `return addComment.moveForm('comment-${ymlParsed._id}', 'comment-form', '${ymlParsed._id}')`)
                         commentListDiv.insertAdjacentElement('beforeend', commentArticle)   
