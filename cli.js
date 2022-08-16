@@ -288,7 +288,7 @@ async function blogIndex() {
                         commentListDiv.insertAdjacentElement('beforeend', commentArticle)   
                     } else {
                         commentArticle.getElementsByClassName("comment-reply-link")[0].remove()
-                        // commentListDiv.getElementById(ymlParsed.replying_to_uid).after(commentArticle)
+                        commentListDiv.getElementById("test") //.after(commentArticle)
                     }
                     
                     // Insert comment element in DOM
