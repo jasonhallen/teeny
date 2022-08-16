@@ -243,8 +243,6 @@ async function blogIndex() {
             // BUILD INDIVIDUAL BLOG POST
             // Remove Read More button
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
-
-            page[1].getElementById("page-content").innerHTML = "<div id='post-section'>" + page[1].getElementById("page-content").innerHTML + "</div><div id='comments-section'></div>"
             
             // Add Prev/Next buttons
             if (pageIndex !== 0) {
@@ -258,6 +256,8 @@ async function blogIndex() {
                 page[1].getElementById("page-content").insertAdjacentElement('beforeend', olderButton)
             }
 
+            page[1].getElementById("page-content").innerHTML = "<div id='post-section'>" + page[1].getElementById("page-content").innerHTML + "</div><div id='comments-section'></div>"
+            
             // Add comments
             if (fs.existsSync(`static/comments/${page[2]}/`)) {
                 let componentComment = await fs.readFile('templates/component_comment.html', 'utf-8')
