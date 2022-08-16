@@ -286,7 +286,7 @@ async function blogIndex() {
                     let time = new Date(ymlParsed.date).toLocaleTimeString('default', {timeStyle: "short"})
                     commentArticle.getElementsByClassName("comment-link")[0].innerHTML = ` - ${date} at ${time}`
                     
-                    commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message)
+                    commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message, {breaks: true})
                     
                     if (!ymlParsed.replying_to_uid) {
                         commentArticle.getElementsByClassName("comment-reply-link")[0].innerHTML = `Reply to ${ymlParsed.name}`
