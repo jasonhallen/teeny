@@ -288,7 +288,7 @@ async function blogIndex() {
                     if (!ymlParsed.replying_to_uid) {
                         commentArticle.getElementsByClassName("comment-reply-link")[0].innerHTML = `Reply to ${ymlParsed.name}`
                         commentArticle.getElementsByClassName("comment-reply-link")[0].setAttribute("onclick", 
-                        `return addComment.moveForm('comment-${ymlParsed._id}', 'comment-form', '${ymlParsed._id}')`)
+                        `return addComment.moveForm('comment-${ymlParsed._id}', 'comment-form', '${ymlParsed._id}', '${ymlParsed.name}')`)
                         commentListDiv.insertAdjacentElement('beforeend', commentArticle)   
                     } else {
                         commentArticle.getElementsByClassName("comment-reply-link")[0].remove()
