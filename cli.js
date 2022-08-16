@@ -289,11 +289,12 @@ async function blogIndex() {
                     } else {
                         commentArticle.getElementsByClassName("comment-reply-link")[0].remove()
                         let articleList = commentListDiv.getElementsByTagName("article") //.after(commentArticle)
-                        articleList.forEach(article => {
-                            if (article.id === ymlParsed.replying_to_uid) {
-                                console.log("FOUND!")
-                            }
-                        })
+                        console.log(typeof(articleList))
+                        // articleList.forEach(article => {
+                        //     if (article.id === ymlParsed.replying_to_uid) {
+                        //         console.log("FOUND!")
+                        //     }
+                        // })
                     }
                     
                     // Insert comment element in DOM
