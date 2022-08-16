@@ -284,7 +284,7 @@ async function blogIndex() {
                     commentListDiv.insertAdjacentElement('beforeend', commentArticle)
 
                     commentArticle.getElementsByClassName("comment-reply-link")[0].setAttribute("onclick", 
-                    `return addComment.moveForm('comment-${ymlParsed._id}', 'respond', '${ymlParsed._id}')`)
+                    `return addComment.moveForm('comment-${ymlParsed._id}', 'comment-form', '${ymlParsed._id}')`)
                     
                     // Insert comment element in DOM
                 })
