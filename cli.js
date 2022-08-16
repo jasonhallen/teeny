@@ -288,13 +288,8 @@ async function blogIndex() {
                         commentListDiv.insertAdjacentElement('beforeend', commentArticle)   
                     } else {
                         commentArticle.getElementsByClassName("comment-reply-link")[0].remove()
+                        commentArticle.classList.add("nested")
                         commentListDiv.querySelector(`#comment-${ymlParsed.replying_to_uid}`).after(commentArticle)
-                        // console.log(typeof(articleList))
-                        // articleList.forEach(article => {
-                        //     if (article.id === ymlParsed.replying_to_uid) {
-                        //         console.log("FOUND!")
-                        //     }
-                        // })
                     }
                     
                     // Insert comment element in DOM
