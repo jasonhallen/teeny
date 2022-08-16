@@ -282,6 +282,9 @@ async function blogIndex() {
 
                     commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message)
                     commentListDiv.insertAdjacentElement('beforeend', commentArticle)
+
+                    commentArticle.getElementsByClassName("comment-reply-link")[0].setAttribute("onclick", 
+                    `return addComment.moveForm('comment-${ymlParsed._id}', 'respond', '${ymlParsed._id}')`)
                     
                     // Insert comment element in DOM
                 })
