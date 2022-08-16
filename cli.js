@@ -7,6 +7,7 @@ const http = require('http')
 const chokidar = require('chokidar')
 const fm = require('front-matter')
 const yaml = require('yaml')
+const { cp } = require('fs')
 
 // attributes: { template: "custom.html" }
 // body: "# My normal markdown ..."
@@ -242,6 +243,8 @@ async function blogIndex() {
             // BUILD INDIVIDUAL BLOG POST
             // Remove Read More button
             page[1].getElementsByClassName("readmore")[0].parentNode.remove()
+
+            page[1].getElementById("page-content").innerHTML = "<div id='post-section'>" + page[1].getElementById("page-content").innerHTML + "</div><div id='comments-section'></div>"
             
             // Add Prev/Next buttons
             if (pageIndex !== 0) {
