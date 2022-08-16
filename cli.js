@@ -247,7 +247,6 @@ async function blogIndex() {
             // Add Prev/Next buttons
             let prevNextContainer = document.createElement("div")
             prevNextContainer.setAttribute("id", "prev-next-container")
-            prevNextContainer.setAttribute("class", "clearfix")
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevNextContainer)
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
@@ -285,7 +284,7 @@ async function blogIndex() {
                     commentArticle.getElementsByClassName("comment-link")[0].setAttribute("href", `#comment-${ymlParsed._id}`)
                     let date = new Date(ymlParsed.date).toLocaleString('default', {year: 'numeric', month: 'long', day: 'numeric',})
                     let time = new Date(ymlParsed.date).toLocaleTimeString('default', {timeStyle: "short"})
-                    commentArticle.getElementsByClassName("comment-link")[0].innerHTML = `${date} at ${time}`
+                    commentArticle.getElementsByClassName("comment-link")[0].innerHTML = ` - ${date} at ${time}`
                     
                     commentArticle.getElementsByClassName("comment-text")[0].innerHTML = marked.parse(ymlParsed.message)
                     
