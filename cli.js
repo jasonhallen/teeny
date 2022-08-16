@@ -247,6 +247,7 @@ async function blogIndex() {
             // Add Prev/Next buttons
             let prevNextContainer = document.createElement("div")
             prevNextContainer.setAttribute("id", "prev-next-container")
+            prevNextContainer.setAttribute("class", "clearfix")
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevNextContainer)
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
