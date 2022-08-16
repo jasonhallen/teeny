@@ -311,7 +311,8 @@ async function blogIndex() {
             let commentFormDiv = document.createElement("div")
             commentFormDiv.setAttribute("id", "comment-form")
             commentFormDiv.innerHTML = componentCommentForm
-            page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
+            // page[1].getElementById("page-content").insertAdjacentElement('beforeend', commentFormDiv)
+            page[1].getElementById("comments-section").appendChild(commentFormDiv)
 
             // Save individual blog post as HTML file
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
