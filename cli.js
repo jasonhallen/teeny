@@ -255,7 +255,8 @@ async function blogIndex() {
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let olderButton = document.createElement("span")
-                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore older-button">Older</a>`
+                olderButton.setAttribute("class", "older-button")
+                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore">Older</a>`
                 page[1].getElementById("prev-next-container").insertAdjacentElement('beforeend', olderButton)
             }
 
