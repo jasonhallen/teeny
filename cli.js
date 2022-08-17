@@ -250,12 +250,12 @@ async function blogIndex() {
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevNextContainer)
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
-                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}" class="readmore floatleft">Newer</a>`
+                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}" class="readmore">Newer</a>`
                 page[1].getElementById("prev-next-container").insertAdjacentElement('beforeend', newerButton)
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let olderButton = document.createElement("span")
-                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore floatright">Older</a>`
+                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore older-button">Older</a>`
                 page[1].getElementById("prev-next-container").insertAdjacentElement('beforeend', olderButton)
             }
 
