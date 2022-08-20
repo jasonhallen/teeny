@@ -274,7 +274,6 @@ async function blogIndex() {
                     const ymlData = fs.readFileSync(`static/comments/${page[2]}/${ymlFile}`, 'utf-8')
                     // Parse YML file
                     ymlParsed = yaml.parse(ymlData)
-                    console.log(ymlParsed)
                     // Insert comment data into template
                     let commentArticle = document.createElement("article")
                     commentArticle.setAttribute("id", `comment-${ymlParsed._id}`)
