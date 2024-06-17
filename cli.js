@@ -362,7 +362,7 @@ async function blogIndex() {
             // await fs.writeFile('public/index.html', finalHtml)
             await fs.writeFile('public/notes.html', finalHtml)
         } else {
-            await fs.writeFile(`public/${pageCount}.html`, finalHtml)
+            await fs.writeFile(`public/notes/${pageCount}.html`, finalHtml)
         }
         pageCount += 1
     }
