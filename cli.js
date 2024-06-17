@@ -63,7 +63,7 @@ async function build() {
     // Copy files in 'static' to 'public' but filter out files that start with '.'
     await safeExecute(async () => await fs.copy('static/', 'public/'), { filter: (f) => !f.startsWith('.') })
 
-    let contents = await fs.readdir('public')
+    // let contents = await fs.readdir('public')
     // console.log(contents)
 
     await processDirectory('pages')
@@ -177,7 +177,7 @@ async function processPage(pagePath) {
         process.exit(1)
     }
 
-    if (targetPath === "blog") {
+    if (targetPath === "notes") {
         blogPages.push([frontmatter, document, pageName])
         return
     }
@@ -226,12 +226,12 @@ async function blogIndex() {
             let documentCopy = page[1].cloneNode(true)
             // Insert link into H2
             let h2 = documentCopy.getElementsByTagName("h2")[0].innerHTML
-            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="/blog/${page[2]}">${h2}</a>`
+            documentCopy.getElementsByTagName("h2")[0].innerHTML = `<a href="/notes/${page[2]}">${h2}</a>`
             if (documentCopy.getElementsByClassName("cover-image")[0]) {
                 let coverImage = documentCopy.getElementsByClassName("cover-image")[0]
-                coverImage.outerHTML = `<a href="/blog/${page[2]}">${coverImage.outerHTML}</a>`
+                coverImage.outerHTML = `<a href="/notes/${page[2]}">${coverImage.outerHTML}</a>`
             }
-            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `/blog/${page[2]}`)
+            documentCopy.getElementsByClassName("readmore")[0].setAttribute("href", `/notes/${page[2]}`)
             const readMoreParent = documentCopy.getElementsByClassName("readmore")[0].parentNode
             // Remove all elements below Read More button
             while (readMoreParent.nextElementSibling !== null) {
@@ -250,13 +250,13 @@ async function blogIndex() {
             page[1].getElementById("page-content").insertAdjacentElement('beforeend', prevNextContainer)
             if (pageIndex !== 0) {
                 let newerButton = document.createElement("span")
-                newerButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex - 1][2]}" class="readmore">Newer</a>`
+                newerButton.innerHTML = `<a href="/notes/${originalBlogPages[pageIndex - 1][2]}" class="readmore">Newer</a>`
                 page[1].getElementById("prev-next-container").insertAdjacentElement('beforeend', newerButton)
             }
             if (pageIndex !== totalBlogPages - 1) {
                 let olderButton = document.createElement("span")
                 olderButton.setAttribute("class", "older-button")
-                olderButton.innerHTML = `<a href="/blog/${originalBlogPages[pageIndex + 1][2]}" class="readmore">Older</a>`
+                olderButton.innerHTML = `<a href="/notes/${originalBlogPages[pageIndex + 1][2]}" class="readmore">Older</a>`
                 page[1].getElementById("prev-next-container").insertAdjacentElement('beforeend', olderButton)
             }
 
@@ -316,7 +316,7 @@ async function blogIndex() {
 
             // Save individual blog post as HTML file
             const finalHtml = "<!DOCTYPE "+page[1].doctype.name+">\n"+page[1].getElementsByTagName('html')[0].outerHTML
-            await fs.writeFile(`public/blog/${page[2]}.html`, finalHtml)
+            await fs.writeFile(`public/notes/${page[2]}.html`, finalHtml)
 
             pageIndex += 1
         }
@@ -360,7 +360,7 @@ async function blogIndex() {
         const finalHtml = "<!DOCTYPE html>\n"+document.getElementsByTagName('html')[0].outerHTML
         if (pageCount === 1) {
             await fs.writeFile('public/index.html', finalHtml)
-            await fs.writeFile('public/blog.html', finalHtml)
+            await fs.writeFile('public/notes.html', finalHtml)
         } else {
             await fs.writeFile(`public/${pageCount}.html`, finalHtml)
         }
@@ -380,7 +380,7 @@ async function develop(port) {
 }
 
 function startServer(port) {
-    console.log(`Development server starting on http://localhost:${port}`)
+    console.log(`Development server starting on http://localhost:${port} poop`)
     return http
         .createServer(function (req, res) {
             const url = req.url
