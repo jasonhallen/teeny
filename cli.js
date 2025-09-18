@@ -382,7 +382,7 @@ async function rollPage() {
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
     roll_list_sorted.forEach(roll => {
-        const roll_id = roll.match(/_(\d+)\.md/)
+        const roll_id = roll.match(/_(\d+)\.md/)[1]
         select_custom_string += `<div>${roll_id}</div>\n`
     })
     select_custom_string += '</div>\n'
