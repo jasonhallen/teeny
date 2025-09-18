@@ -144,7 +144,7 @@ async function processPage(pagePath) {
             // Insert title with roll dropdown
             let image_page_header = await rollPage(frontmatter.title)
             if (frontmatter.film) {
-                image_page_header += `<p class="muted">${frontmatter.film}</br>${frontmatter.camera}</p>`
+                image_page_header += `<p class="muted">${frontmatter.film} | ${frontmatter.camera}</p>`
             }
             markdown = image_page_header + markdown
             let roll_list = await fs.readdir(`pages/img`)
