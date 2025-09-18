@@ -141,7 +141,7 @@ async function processPage(pagePath) {
     if (frontmatter.title) {
         if (targetPath === "img") {
             // Insert title with roll dropdown
-            rollPage()
+            rollPage(frontmatter.title)
         }
         else {
             document.title = frontmatter.title
@@ -376,14 +376,18 @@ async function blogIndex() {
     }
 }
 
-async function rollPage() {
+async function rollPage(current_roll) {
     // Get list of roll MD files in img directory
     let roll_list = await fs.readdir(`pages/img`)
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
     roll_list_sorted.forEach(roll => {
         const roll_id = roll.match(/_(\d+)\.md/)[1]
-        select_custom_string += `<div>${roll_id}</div>\n`
+        if (current_roll === roll_id) {
+            select_custom_string += `<div class="current-selection">${roll_id}</div>\n`
+        } else {
+            select_custom_string += `<div>${roll_id}</div>\n`
+        }
     })
     select_custom_string += '</div>\n'
     console.log(select_custom_string)
