@@ -141,7 +141,7 @@ async function processPage(pagePath) {
     if (frontmatter.title) {
         if (targetPath === "img") {
             // Insert title with roll dropdown
-            rollPage(frontmatter.title)
+            markdown = rollPage(frontmatter.title) + markdown
         }
         else {
             document.title = frontmatter.title
@@ -391,6 +391,7 @@ async function rollPage(current_roll) {
     })
     select_custom_string += '</div>\n'
     console.log(select_custom_string)
+    return select_custom_string
 
     // Sort by reverse numerical order
     // Create div container - select-custom
