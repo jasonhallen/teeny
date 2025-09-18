@@ -129,16 +129,23 @@ async function processPage(pagePath) {
         description.content = frontmatter.description
     }
 
-    // Add H2 title and cover image
+    // Add cover image
     if (frontmatter.image && !frontmatter.imageCaption) {
         markdown = `<figure><img class="cover-image" src='${frontmatter.image}' alt='${frontmatter.imageAlt}'></figure>\n\n` + markdown
     }
-    if (frontmatter.image && frontmatter.imageCaption) {
+    else if (frontmatter.image && frontmatter.imageCaption) {
         markdown = `<figure><img class="cover-image" src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>\n\n` + markdown
     }
+
+    // Add H2 title
     if (frontmatter.title) {
-        document.title = frontmatter.title
-        markdown = `<h2>${frontmatter.title}</h2>\n\n` + markdown
+        if (targetPath === "img") {
+            
+        }
+        else {
+            document.title = frontmatter.title
+            markdown = `<h2>${frontmatter.title}</h2>\n\n` + markdown
+        }
     }
     markdown = markdown.replace("[READ MORE]", `<a class="readmore" href="/">Read more</a>`)
 
@@ -366,6 +373,16 @@ async function blogIndex() {
         }
         pageCount += 1
     }
+}
+
+async function rollPage() {
+    // Insert JS to trigger selection change
+    // Generate roll selection list
+        // Reverse numerical order
+        // Set current roll as selected default
+    // Create h2 with dropdown menu
+    // Insert film and camera metadata
+    // Embed images
 }
 
 async function develop(port) {
