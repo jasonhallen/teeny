@@ -151,7 +151,7 @@ async function processPage(pagePath) {
             const roll_list_sorted = roll_list.sort().reverse()
             console.log(roll_list_sorted[0])
             console.log(frontmatter.title)
-            if (frontmatter.title === roll_list_sorted[0]) {
+            if (`roll_${frontmatter.title}.md` === roll_list_sorted[0]) {
                 latest_roll = true;
             }
         }
