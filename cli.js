@@ -149,6 +149,8 @@ async function processPage(pagePath) {
             markdown = image_page_header + markdown
             let roll_list = await fs.readdir(`pages/img`)
             const roll_list_sorted = roll_list.sort().reverse()
+            console.log(roll_list_sorted[0])
+            console.log(frontmatter.title)
             if (frontmatter.title === roll_list_sorted[0]) {
                 latest_roll = true;
             }
@@ -206,7 +208,7 @@ async function processPage(pagePath) {
 
     await fs.writeFile(`public/${targetPath}/${pageName}.html`, finalHtml)
     
-    if (latest_roll) {
+    if (latest_roll == true) {
         await fs.writeFile(`public/img.html`, finalHtml)
     }
 }
