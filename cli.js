@@ -380,11 +380,11 @@ async function rollPage() {
     // Get list of roll MD files in img directory
     let roll_list = await fs.readdir(`pages/img`)
     const roll_list_sorted = roll_list.sort().reverse()
-    let select_custom_string = '<div id="select-custom">'
+    let select_custom_string = '<div id="select-custom">\n'
     for (roll in roll_list_sorted) {
-        select_custom_string += `<div>${roll}</div>`
+        select_custom_string += `<div>${roll}</div>\n`
     }
-    select_custom_string += '</div>'
+    select_custom_string += '</div>\n'
     console.log(select_custom_string)
 
     // Sort by reverse numerical order
