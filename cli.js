@@ -149,9 +149,7 @@ async function processPage(pagePath) {
             markdown = image_page_header + markdown
             let roll_list = await fs.readdir(`pages/img`)
             const roll_list_sorted = roll_list.sort().reverse()
-            console.log(roll_list_sorted[0])
-            console.log(frontmatter.title)
-            if (`roll_${frontmatter.title}.md` === roll_list_sorted[0]) {
+            if (`${frontmatter.title}.md` === roll_list_sorted[0]) {
                 latest_roll = true;
             }
         }
@@ -402,11 +400,10 @@ async function rollPage(current_roll) {
     select_custom_string += `<div id="select-selected"><h2 onclick="selectOpen(event)">Roll: ${current_roll}</h2></div>\n`
     select_custom_string += '<div class="select-items select-hide">\n'
     roll_list_sorted.forEach(roll => {
-        const roll_id = roll.match(/_(\d+)\.md/)[1]
-        if (current_roll === roll_id) {
-            select_custom_string += `<div class="current-selection"><a href="/img/roll_${roll_id}">${roll_id}</a></div>\n`
+        if (`${current_roll}.md` === roll) {
+            select_custom_string += `<div class="current-selection"><a href="/img/${roll_id}">${roll_id}</a></div>\n`
         } else {
-            select_custom_string += `<div><a href="/img/roll_${roll_id}">${roll_id}</a></div>\n`
+            select_custom_string += `<div><a href="/img/${roll_id}">${roll_id}</a></div>\n`
         }
     })
     select_custom_string += '</div>\n</div>\n'
