@@ -378,7 +378,7 @@ async function blogIndex() {
 
 async function rollPage() {
     // Get list of roll MD files in img directory
-    let roll_list = await fs.readdir(`.`)
+    let roll_list = await fs.readdir(`static`)
     console.log(roll_list)
     // Sort by reverse numerical order
     // Create div container - select-custom
