@@ -379,7 +379,14 @@ async function blogIndex() {
 async function rollPage() {
     // Get list of roll MD files in img directory
     let roll_list = await fs.readdir(`pages/img`)
-    console.log(roll_list.sort().reverse())
+    const roll_list_sorted = roll_list.sort().reverse()
+    let select_custom_string = '<div id="select-custom">'
+    for (roll in roll_list_sorted) {
+        select_custom_string += `<div>${roll}</div>`
+    }
+    select_custom_string += '</div>'
+    console.log(select_custom_string)
+
     // Sort by reverse numerical order
     // Create div container - select-custom
     // For each item in list add as option
