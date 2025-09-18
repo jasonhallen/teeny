@@ -140,7 +140,8 @@ async function processPage(pagePath) {
     // Add H2 title
     if (frontmatter.title) {
         if (targetPath === "img") {
-            
+            // Insert title with roll dropdown
+            rollPage()
         }
         else {
             document.title = frontmatter.title
@@ -376,10 +377,13 @@ async function blogIndex() {
 }
 
 async function rollPage() {
-    // Insert JS to trigger selection change
-    // Generate roll selection list
-        // Reverse numerical order
-        // Set current roll as selected default
+    // Get list of roll MD files in img directory
+    let roll_list = await fs.readdir(`/img`)
+    console.log(roll_list)
+    // Sort by reverse numerical order
+    // Create div container - select-custom
+    // For each item in list add as option
+    // When item matches current page, insert current selection class
     // Create h2 with dropdown menu
     // Insert film and camera metadata
     // Embed images
