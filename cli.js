@@ -401,9 +401,9 @@ async function rollPage(current_roll) {
     select_custom_string += '<div class="select-items select-hide">\n'
     roll_list_sorted.forEach(roll => {
         if (`${current_roll}.md` === roll) {
-            select_custom_string += `<div class="current-selection"><a href="/img/${roll_id}">${roll_id}</a></div>\n`
+            select_custom_string += `<div class="current-selection"><a href="/img/${roll}">${roll}</a></div>\n`
         } else {
-            select_custom_string += `<div><a href="/img/${roll_id}">${roll_id}</a></div>\n`
+            select_custom_string += `<div><a href="/img/${roll}">${roll}</a></div>\n`
         }
     })
     select_custom_string += '</div>\n</div>\n'
