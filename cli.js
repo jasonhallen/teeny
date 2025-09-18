@@ -137,6 +137,7 @@ async function processPage(pagePath) {
         markdown = `<figure><img class="cover-image" src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>\n\n` + markdown
     }
 
+    let latest_roll = false;
     // Add H2 title
     if (frontmatter.title) {
         if (targetPath === "img") {
@@ -146,7 +147,6 @@ async function processPage(pagePath) {
                 image_page_header += `<p class="muted">${frontmatter.film}</br>${frontmatter.camera}</p>`
             }
             markdown = image_page_header + markdown
-            let latest_roll = false;
             let roll_list = await fs.readdir(`pages/img`)
             const roll_list_sorted = roll_list.sort().reverse()
             if (frontmatter.title === roll_list_sorted[0]) {
