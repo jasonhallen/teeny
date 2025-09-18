@@ -390,7 +390,7 @@ async function rollPage(current_roll) {
     roll_list_sorted.forEach(roll => {
         const roll_id = roll.match(/_(\d+)\.md/)[1]
         if (current_roll === roll_id) {
-            select_custom_string += `<div class="current-selection">${roll_id}</div>\n`
+            select_custom_string += `<div class="current-selection"><a href="img/roll_${roll_id}">${roll_id}</a></div>\n`
         } else {
             select_custom_string += `<div>${roll_id}</div>\n`
         }
