@@ -381,6 +381,8 @@ async function rollPage(current_roll) {
     let roll_list = await fs.readdir(`pages/img`)
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
+    select_custom_string += `<div id="select-selected">${current_roll }</div>\n`
+    select_custom_string += '<div id="select-items select-hide">\n'
     roll_list_sorted.forEach(roll => {
         const roll_id = roll.match(/_(\d+)\.md/)[1]
         if (current_roll === roll_id) {
@@ -389,7 +391,7 @@ async function rollPage(current_roll) {
             select_custom_string += `<div>${roll_id}</div>\n`
         }
     })
-    select_custom_string += '</div>\n'
+    select_custom_string += '</div>\n</div>\n'
     console.log(select_custom_string)
     return select_custom_string
 
