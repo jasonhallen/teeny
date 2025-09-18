@@ -381,9 +381,9 @@ async function rollPage() {
     let roll_list = await fs.readdir(`pages/img`)
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
-    for (roll in roll_list_sorted) {
+    roll_list_sorted.forEach(roll => {
         select_custom_string += `<div>${roll}</div>\n`
-    }
+    })
     select_custom_string += '</div>\n'
     console.log(select_custom_string)
 
