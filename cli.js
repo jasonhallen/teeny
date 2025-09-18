@@ -142,6 +142,9 @@ async function processPage(pagePath) {
         if (targetPath === "img") {
             // Insert title with roll dropdown
             markdown = await rollPage(frontmatter.title) + markdown
+            if (frontmatter.film) {
+                markdown = `<p class="muted">${frontmatter.film}</br>${frontmatter.camera}</p>` + markdown
+            }
         }
         else {
             document.title = frontmatter.title
