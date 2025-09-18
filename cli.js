@@ -146,6 +146,12 @@ async function processPage(pagePath) {
                 image_page_header += `<p class="muted">${frontmatter.film}</br>${frontmatter.camera}</p>`
             }
             markdown = image_page_header + markdown
+            let latest_roll = false;
+            let roll_list = await fs.readdir(`pages/img`)
+            const roll_list_sorted = roll_list.sort().reverse()
+            if (frontmatter.title === roll_list_sorted[0]) {
+                latest_roll = true;
+            }
         }
         else {
             document.title = frontmatter.title
@@ -194,9 +200,15 @@ async function processPage(pagePath) {
         return
     }
 
+    // if this is latest img post, duplicate it as img.md in main nav
+
     const finalHtml = "<!DOCTYPE "+document.doctype.name+">\n"+document.getElementsByTagName('html')[0].outerHTML
 
     await fs.writeFile(`public/${targetPath}/${pageName}.html`, finalHtml)
+    
+    if (latest_roll) {
+        await fs.writeFile(`public/img.html`, finalHtml)
+    }
 }
 
 async function blogIndex() {
