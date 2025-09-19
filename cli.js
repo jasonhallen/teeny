@@ -175,7 +175,8 @@ async function processPage(pagePath) {
             const preloadLink = document.createElement('link');
             preloadLink.rel = 'preload';
             preloadLink.href = firstImagePath;
-            preloadLink.as = 'image';
+            // preloadLink.as = 'image';
+            preloadLink.setAttribute("as", "image");
 
             document.head.appendChild(preloadLink);
             // console.log("TESTING")
