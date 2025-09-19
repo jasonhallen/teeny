@@ -398,7 +398,7 @@ async function rollPage(current_roll) {
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
     select_custom_string += `<div id="select-selected"><h2 onclick="selectOpen(event)">Roll: ${current_roll}</h2></div>\n`
-    select_custom_string += '<div class="select-items select-hide">\n'
+    select_custom_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
     roll_list_sorted.forEach(roll => {
         let roll_id = roll.slice(0, -3)
         if (current_roll === roll_id) {
