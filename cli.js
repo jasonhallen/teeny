@@ -178,7 +178,8 @@ async function processPage(pagePath) {
             preloadLink.as = 'image';
 
             document.head.appendChild(preloadLink);
-            console.log("TESTING")
+            // console.log("TESTING")
+            console.log('Preload link attributes:', preloadLink.outerHTML);
         }
 
     }
