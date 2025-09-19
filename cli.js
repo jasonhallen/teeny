@@ -178,6 +178,7 @@ async function processPage(pagePath) {
             preloadLink.as = 'image';
 
             document.head.appendChild(preloadLink);
+            console.log("TESTING")
         }
 
     }
@@ -427,7 +428,7 @@ async function rollPage(current_roll) {
         }
     })
     select_custom_string += '</div>\n</div>\n'
-    console.log(select_custom_string)
+    // console.log(select_custom_string)
     return select_custom_string
 
     // Sort by reverse numerical order
