@@ -162,6 +162,25 @@ async function processPage(pagePath) {
 
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
+
+    if (targetPath === 'img') {
+        const tempDom = new JSDOM(parsedHtml);
+        const tempDocument = tempDom.window.document;
+        const firstImg = tempDocument.querySelector('img');
+
+        let firstImagePath = null;
+
+        if (firstImg) {
+            firstImagePath = firstImg.getAttribute('src');
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.href = firstImagePath;
+            preloadLink.as = 'image';
+
+            document.head.appendChild(preloadLink);
+        }
+
+    }
     
     // Add .md HTML to the "page-content" div in the document
     const pageContentElement = document.getElementById('page-content')
