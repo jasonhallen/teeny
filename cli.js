@@ -402,7 +402,7 @@ async function rollPage(current_roll) {
     roll_list_sorted.forEach(roll => {
         let roll_id = roll.slice(0, -3)
         if (current_roll === roll_id) {
-            select_custom_string += `<div class="current-selection"><a href="/img/${roll_id}">${roll_id}</a></div>\n`
+            select_custom_string += `<div class="current-selection pseudo-hover"><a href="/img/${roll_id}">${roll_id}</a></div>\n`
         } else {
             select_custom_string += `<div><a href="/img/${roll_id}">${roll_id}</a></div>\n`
         }
