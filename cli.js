@@ -140,14 +140,14 @@ async function processPage(pagePath) {
     let latest_roll = false;
     // Add H2 title
     if (frontmatter.title) {
-        if (targetPath === "img") {
+        if (targetPath === "photo") {
             // Insert title with roll dropdown
             let image_page_header = await rollPage(frontmatter.title)
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
             markdown = image_page_header + markdown
-            let roll_list = await fs.readdir(`pages/img`)
+            let roll_list = await fs.readdir(`pages/photo`)
             const roll_list_sorted = roll_list.sort().reverse()
             if (`${frontmatter.title}.md` === roll_list_sorted[0]) {
                 latest_roll = true;
@@ -163,7 +163,7 @@ async function processPage(pagePath) {
     // Convert .md markdown into HTML
     const parsedHtml = marked.parse(markdown)
 
-    if (targetPath === 'img') {
+    if (targetPath === 'photo') {
         const tempDom = new JSDOM(parsedHtml);
         const tempDocument = tempDom.window.document;
         const firstImg = tempDocument.querySelector('img');
@@ -180,7 +180,7 @@ async function processPage(pagePath) {
 
             document.head.appendChild(preloadLink);
             // console.log("TESTING")
-            console.log('Preload link attributes:', preloadLink.outerHTML);
+            // console.log('Preload link attributes:', preloadLink.outerHTML);
         }
 
     }
@@ -229,7 +229,7 @@ async function processPage(pagePath) {
     await fs.writeFile(`public/${targetPath}/${pageName}.html`, finalHtml)
     
     if (latest_roll == true) {
-        await fs.writeFile(`public/img.html`, finalHtml)
+        await fs.writeFile(`public/photo.html`, finalHtml)
     }
 }
 
@@ -416,7 +416,7 @@ async function blogIndex() {
 
 async function rollPage(current_roll) {
     // Get list of roll MD files in img directory
-    let roll_list = await fs.readdir(`pages/img`)
+    let roll_list = await fs.readdir(`pages/photo`)
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
     select_custom_string += `<div id="select-selected"><h2 onclick="selectOpen(event)">Roll: ${current_roll}</h2></div>\n`
@@ -424,9 +424,9 @@ async function rollPage(current_roll) {
     roll_list_sorted.forEach(roll => {
         let roll_id = roll.slice(0, -3)
         if (current_roll === roll_id) {
-            select_custom_string += `<div class="current-selection pseudo-hover"><a href="/img/${roll_id}">${roll_id}</a></div>\n`
+            select_custom_string += `<div class="current-selection pseudo-hover"><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
         } else {
-            select_custom_string += `<div><a href="/img/${roll_id}">${roll_id}</a></div>\n`
+            select_custom_string += `<div><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
         }
     })
     select_custom_string += '</div>\n</div>\n'
