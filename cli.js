@@ -133,6 +133,7 @@ async function processPage(pagePath) {
         links.forEach(link => {
             // Get the href attribute
             const href = link.getAttribute('href');
+            console.log(href)
 
             // Check if the href contains the string to match
             if (href) {
