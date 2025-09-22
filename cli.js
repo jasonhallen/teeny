@@ -135,13 +135,15 @@ async function processPage(pagePath) {
             const href = link.getAttribute('href');
 
             // Check if the href contains the string to match
-            if (href && href.includes(pageName)) {
-                // Get the parent li element
-                const parentLi = link.parentElement;
-
-                // Add the 'active' class to the parent li
-                if (parentLi) {
-                    parentLi.classList.add('active');
+            if (href) {
+                if (href.includes(pageName) || href.includes(targetPath)) {
+                    // Get the parent li element
+                    const parentLi = link.parentElement;
+                    
+                    // Add the 'active' class to the parent li
+                    if (parentLi) {
+                        parentLi.classList.add('active');
+                    }
                 }
             }
         });
