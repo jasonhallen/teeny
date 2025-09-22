@@ -128,12 +128,12 @@ async function processPage(pagePath) {
     if (navElement) {
         // Select all the anchor elements within the nav
         const links = navElement.querySelectorAll('a');
+        console.log(links)
 
         // Loop through each link
         links.forEach(link => {
             // Get the href attribute
             const href = link.getAttribute('href');
-            console.log(href)
 
             // Check if the href contains the string to match
             if (href) {
