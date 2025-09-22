@@ -120,6 +120,29 @@ async function processPage(pagePath) {
     const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
     const headerElement = document.querySelector('#header')
     headerElement.insertAdjacentHTML('afterbegin', componentHeader);
+    
+    const navElement = document.querySelector('#nav')
+    if (navElement) {
+        // Select all the anchor elements within the nav
+        const links = navElement.querySelectorAll('a');
+
+        // Loop through each link
+        links.forEach(link => {
+            // Get the href attribute
+            const href = link.getAttribute('href');
+
+            // Check if the href contains the string to match
+            if (href && href.includes(pageName)) {
+                // Get the parent li element
+                const parentLi = link.parentElement;
+
+                // Add the 'active' class to the parent li
+                if (parentLi) {
+                    parentLi.classList.add('active');
+                }
+            }
+        });
+    }
 
     // Append page keywords to default website keywords
     if (frontmatter.keywords) {
