@@ -290,6 +290,33 @@ async function blogIndex() {
         const headElement = document.getElementsByTagName('head')
         headElement[0].innerHTML = componentHead
 
+        const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
+        const headerElement = document.querySelector('#header')
+        headerElement.insertAdjacentHTML('afterbegin', componentHeader);
+        
+        const navElement = document.querySelector('#nav')
+        if (navElement) {
+            // Select all the anchor elements within the nav
+            const links = navElement.querySelectorAll('a');
+            // console.log(links)
+
+            // Loop through each link
+            links.forEach(link => {
+                // Get the href attribute
+                const href = link.getAttribute('href');
+
+                // Check if the href contains the string to match
+                if (href && href.includes('text')) {
+                    const parentLi = link.parentElement;
+                    
+                    // Add the 'active' class to the parent li
+                    if (parentLi) {
+                        parentLi.classList.add('active');
+                    }
+                }
+            });
+        }
+
         // Add description to meta element
         if (frontmatter.description) {
             let description = headElement[0].getElementsByTagName("meta").description
