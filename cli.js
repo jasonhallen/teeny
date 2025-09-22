@@ -123,6 +123,9 @@ async function processPage(pagePath) {
     const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
     const headerElement = document.querySelector('#header')
     headerElement.insertAdjacentHTML('afterbegin', componentHeader);
+
+    const iframe = '<iframe style="height:0px;width:0px;visibility:hidden" src="about:blank">this frame prevents back/forward cache</iframe>'
+    document.body.insertAdjacentHTML('beforeend', iframe)
     
     const navElement = document.querySelector('#nav')
     if (navElement) {
@@ -292,7 +295,10 @@ async function blogIndex() {
 
         const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
         const headerElement = document.querySelector('#header')
-        headerElement.insertAdjacentHTML('afterbegin', componentHeader);
+        headerElement.insertAdjacentHTML('afterbegin', componentHeader)
+
+        const iframe = '<iframe style="height:0px;width:0px;visibility:hidden" src="about:blank">this frame prevents back/forward cache</iframe>'
+        document.body.insertAdjacentHTML('beforeend', iframe)
         
         const navElement = document.querySelector('#nav')
         if (navElement) {
