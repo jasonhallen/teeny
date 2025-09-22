@@ -137,7 +137,7 @@ async function processPage(pagePath) {
 
             // Check if the href contains the string to match
             if (href) {
-                if (href.includes(pageName) || href.includes(targetPath)) {
+                if (href.includes(pageName)) {
                     // Get the parent li element
                     const parentLi = link.parentElement;
                     
