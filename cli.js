@@ -116,6 +116,10 @@ async function processPage(pagePath) {
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
     const headElement = document.getElementsByTagName('head')
     headElement[0].innerHTML = headElement[0].innerHTML + componentHead
+    
+    const componentHeader = await fs.readFile('templates/component_header.html', 'utf-8')
+    const headerElement = document.querySelector('#header')
+    headerElement.insertAdjacentHTML('afterbegin', componentHeader);
 
     // Append page keywords to default website keywords
     if (frontmatter.keywords) {
