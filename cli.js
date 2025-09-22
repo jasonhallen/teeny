@@ -128,7 +128,7 @@ async function processPage(pagePath) {
     if (navElement) {
         // Select all the anchor elements within the nav
         const links = navElement.querySelectorAll('a');
-        console.log(links)
+        // console.log(links)
 
         // Loop through each link
         links.forEach(link => {
