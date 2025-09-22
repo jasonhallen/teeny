@@ -111,6 +111,9 @@ async function processPage(pagePath) {
     const pagePathParts = pagePath.replace('pages/', '').split('/')
     const pageName = pagePathParts.pop().split('.md')[0]
     const targetPath = pagePathParts.join('/')
+    console.log(pagePath)
+    console.log(pageName)
+    console.log(targetPath)
 
     // Insert the "component_head" template into "head" element of document
     const componentHead = await fs.readFile('templates/component_head.html', 'utf-8')
@@ -132,7 +135,7 @@ async function processPage(pagePath) {
             const href = link.getAttribute('href');
 
             // Check if the href contains the string to match
-            if (href && (href.includes(pageName) || href.includes(targetPath))) {
+            if (href && href.includes(pageName)) {
                 // Get the parent li element
                 const parentLi = link.parentElement;
 
