@@ -179,7 +179,7 @@ async function processPage(pagePath) {
         if (targetPath === "photo") {
             // Insert title with roll dropdown
             let image_page_header = await rollPage(frontmatter.title)
-            image_page_header += '<p>[More &#x2304;]</p>'
+            image_page_header += '<p>[More &#x2228;]</p>'
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
