@@ -179,7 +179,7 @@ async function processPage(pagePath) {
         if (targetPath === "photo") {
             // Insert title with roll dropdown
             let image_page_header = await rollPage(frontmatter.title)
-            image_page_header += '<p>[More rolls &#x26DB;]</p>'
+            image_page_header += '<p>[More &#x26DB;]</p>'
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
@@ -486,7 +486,7 @@ async function rollPage(current_roll) {
     let roll_list = await fs.readdir(`pages/photo`)
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
-    select_custom_string += `<div id="select-selected" onclick="selectOpen(event)"><h2>Roll: ${current_roll}</h2><span class="dropdown-icon">[others &#x2228;]</span></div>\n`
+    select_custom_string += `<div id="select-selected" onclick="selectOpen(event)"><h2>Roll: ${current_roll}</h2><span class="dropdown-icon">&#x2228</span></div>\n`
     select_custom_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
     roll_list_sorted.forEach(roll => {
         let roll_id = roll.slice(0, -3)
