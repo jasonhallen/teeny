@@ -485,7 +485,7 @@ async function rollPage(current_roll) {
     let roll_list = await fs.readdir(`pages/photo`)
     const roll_list_sorted = roll_list.sort().reverse()
     let select_custom_string = '<div id="select-custom">\n'
-    select_custom_string += `<div id="select-selected"><h2 onclick="selectOpen(event)">Roll: ${current_roll} &#2228;</h2></div>\n`
+    select_custom_string += `<div id="select-selected"><h2 onclick="selectOpen(event)">Roll: ${current_roll} &#x2228;</h2></div>\n`
     select_custom_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
     roll_list_sorted.forEach(roll => {
         let roll_id = roll.slice(0, -3)
