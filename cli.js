@@ -499,7 +499,8 @@ async function rollPage(current_roll) {
     select_custom_string += '</div>\n</div>\n'
 
     // Create roll navigation structure
-    const currentIndex = roll_list_sorted.findIndex(roll => roll.slice(0, -3) === current_roll)
+    roll_list = roll_list.sort()
+    const currentIndex = roll_list.findIndex(roll => roll.slice(0, -3) === current_roll)
     
     // Initialize links
     let firstLink = null;
@@ -512,15 +513,15 @@ async function rollPage(current_roll) {
     let rolls_nav_next
 
     // Set '<<' and '>>' links
-    if (roll_list_sorted[0].slice(0, -3) !== current_roll) {
-        firstLink = roll_list_sorted[0].slice(0, -3);
+    if (roll_list[0].slice(0, -3) !== current_roll) {
+        firstLink = roll_list[0].slice(0, -3);
         rolls_nav_first = `<span id="rolls_nav_first"><a href="/photo/${firstLink}"><<</a></span>`
     } else {
         rolls_nav_first = '<span id="rolls_nav_first" class="muted"><<</span>'
     }
 
-    if (roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3) !== current_roll) {
-        lastLink = roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3);
+    if (roll_list[roll_list.length - 1].slice(0, -3) !== current_roll) {
+        lastLink = roll_list[roll_list.length - 1].slice(0, -3);
         rolls_nav_last = `<span id="rolls_nav_last"><a href="/photo/${lastLink}">>></a></span>`
     } else {
         rolls_nav_last = '<span id="rolls_nav_last" class="muted">>></span>'
@@ -528,13 +529,13 @@ async function rollPage(current_roll) {
 
     // Set '<' and '>' links based on the current roll's index
     if (currentIndex > 0) {
-        previousLink = roll_list_sorted[currentIndex - 1].slice(0, -3)
+        previousLink = roll_list[currentIndex - 1].slice(0, -3)
         rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}"><</a></span>`
     } else {
         rolls_nav_previous = '<span id="rolls_nav_previous" class="muted"><</span>'
     }
-    if (currentIndex < roll_list_sorted.length - 1) {
-        nextLink = roll_list_sorted[currentIndex + 1].slice(0, -3)
+    if (currentIndex < roll_list.length - 1) {
+        nextLink = roll_list[currentIndex + 1].slice(0, -3)
         rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}">></a></span>`
     } else {
         rolls_nav_next = '<span id="rolls_nav_next" class="muted">></span>'
