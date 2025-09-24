@@ -178,7 +178,7 @@ async function processPage(pagePath) {
     if (frontmatter.title) {
         if (targetPath === "photo") {
             // Insert title with roll dropdown
-            let image_page_header, roll_navigation_string = await rollPage(frontmatter.title)
+            let [image_page_header, roll_navigation_string] = await rollPage(frontmatter.title)
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
@@ -556,7 +556,7 @@ async function rollPage(current_roll) {
     console.log(select_custom_string)
 
     // console.log(select_custom_string)
-    return select_custom_string, roll_navigation_string
+    return [select_custom_string, roll_navigation_string]
 
     // Sort by reverse numerical order
     // Create div container - select-custom
