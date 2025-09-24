@@ -541,13 +541,13 @@ async function rollPage(current_roll) {
     }
 
     let roll_navigation = `
-    <div id='rolls_navigation'>
-        ${rolls_nav_first}
-        ${rolls_nav_previous}
-        <span id='rolls_nav_select'></span>
-        ${rolls_nav_next}
-        ${rolls_nav_last}
-    </div>
+<div id='rolls_navigation'>
+    ${rolls_nav_first}
+    ${rolls_nav_previous}
+    <span id='rolls_nav_select'></span>
+    ${rolls_nav_next}
+    ${rolls_nav_last}
+</div>
     `
     
     select_custom_string += roll_navigation
