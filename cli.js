@@ -182,8 +182,8 @@ async function processPage(pagePath) {
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
+            image_page_header += roll_navigation_string
             markdown = image_page_header + markdown
-            markdown = roll_navigation_string + markdown
             let roll_list = await fs.readdir(`pages/photo`)
             const roll_list_sorted = roll_list.sort().reverse()
             if (`${frontmatter.title}.md` === roll_list_sorted[0]) {
