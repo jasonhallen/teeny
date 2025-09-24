@@ -488,7 +488,7 @@ async function rollPage(current_roll) {
     // let select_custom_string = '<div id="select-custom">\n'
     // select_custom_string += `<div id="select-selected" onclick="selectOpen(event)"><h2>Roll: ${current_roll}</h2><span class="dropdown-icon">&#x2228</span></div>\n`
     // select_custom_string += `<div><h2>Roll: ${current_roll}</h2></div>\n`
-    select_custom_string += `<h2>Roll: ${current_roll}</h2>\n`
+    let select_custom_string = `<h2>Roll: ${current_roll}</h2>\n`
     // select_custom_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
     // roll_list_sorted.forEach(roll => {
     //     let roll_id = roll.slice(0, -3)
