@@ -182,7 +182,7 @@ async function processPage(pagePath) {
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
-            image_page_header += roll_navigation_string
+            // image_page_header += roll_navigation_string
             markdown = image_page_header + markdown
             let roll_list = await fs.readdir(`pages/photo`)
             const roll_list_sorted = roll_list.sort().reverse()
@@ -553,7 +553,7 @@ async function rollPage(current_roll) {
 <div id='rolls_navigation' class='muted'>
     <!--${rolls_nav_first}-->
     ${rolls_nav_previous}
-    <span id='rolls-nav-select' onclick="selectOpen(event)">[${current_roll}<span class="dropdown-icon">&#x2228;</span>]</span>
+    <span id='rolls-nav-select' onclick="selectOpen(event)">&#x2022;&#x2022;&#x2022;<span class="dropdown-icon">&#x2228;</span>]</span>
     ${rolls_nav_next}
     <!--${rolls_nav_last}-->
 </div>
@@ -570,7 +570,7 @@ async function rollPage(current_roll) {
 
     roll_navigation_string += '</div>\n'
     
-    // select_custom_string += roll_navigation
+    select_custom_string += roll_navigation
     console.log(select_custom_string)
 
     // console.log(select_custom_string)
