@@ -535,7 +535,7 @@ async function rollPage(current_roll) {
         rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}" class="muted">< Prev</a></span>`
     } else {
         // rolls_nav_previous = '<span id="rolls_nav_previous" class="muted"><</span>'
-        rolls_nav_previous = ''
+        rolls_nav_previous = '<span></span>'
     }
     if (currentIndex < roll_list.length - 1) {
         nextLink = roll_list[currentIndex + 1].slice(0, -3)
@@ -544,7 +544,7 @@ async function rollPage(current_roll) {
     } else {
         // rolls_nav_next = '<span id="rolls_nav_next" class="muted">></span>'
         // rolls_nav_next = '<span id="rolls_nav_next" class="muted">Next ></span>'
-        rolls_nav_next = ''
+        rolls_nav_next = '<span></span>'
     }
 
     let roll_navigation_string = `
