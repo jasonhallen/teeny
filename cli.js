@@ -544,7 +544,7 @@ async function rollPage(current_roll) {
 <div id='rolls_navigation'>
     ${rolls_nav_first}
     ${rolls_nav_previous}
-    <span id='rolls_nav_select'></span>
+    <span id='rolls_nav_select' onclick="selectOpen(event)">Select roll V</span>
     ${rolls_nav_next}
     ${rolls_nav_last}
 </div>
