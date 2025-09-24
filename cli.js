@@ -534,7 +534,7 @@ async function rollPage(current_roll) {
     if (currentIndex > 0) {
         previousLink = roll_list[currentIndex - 1].slice(0, -3)
         // rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}"><</a></span>`
-        rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}" class="muted">< Prev</a></span>`
+        rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}">< Prev</a></span>`
     } else {
         // rolls_nav_previous = '<span id="rolls_nav_previous" class="muted"><</span>'
         rolls_nav_previous = '<span></span>'
@@ -542,7 +542,7 @@ async function rollPage(current_roll) {
     if (currentIndex < roll_list.length - 1) {
         nextLink = roll_list[currentIndex + 1].slice(0, -3)
         // rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}">></a></span>`
-        rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}" class="muted">Next ></a></span>`
+        rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}">Next ></a></span>`
     } else {
         // rolls_nav_next = '<span id="rolls_nav_next" class="muted">></span>'
         // rolls_nav_next = '<span id="rolls_nav_next" class="muted">Next ></span>'
@@ -550,10 +550,10 @@ async function rollPage(current_roll) {
     }
 
     let roll_navigation_string = `
-<div id='rolls_navigation' class='muted'>
+<div id='rolls_navigation'>
     <!--${rolls_nav_first}-->
     ${rolls_nav_previous}
-    <span id='rolls-nav-select' onclick="selectOpen(event)">&#x2022;&#x2022;&#x2022;<span class="dropdown-icon">&#x2228;</span>]</span>
+    <span id='rolls-nav-select' onclick="selectOpen(event)">[&#x2022;&#x2022;&#x2022;<span class="dropdown-icon">&#x2228;</span>]</span>
     ${rolls_nav_next}
     <!--${rolls_nav_last}-->
 </div>
