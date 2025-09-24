@@ -485,20 +485,21 @@ async function rollPage(current_roll) {
     // Get list of roll MD files in img directory
     let roll_list = await fs.readdir(`pages/photo`)
     const roll_list_sorted = roll_list.sort().reverse()
-    let select_custom_string = '<div id="select-custom">\n'
+    // let select_custom_string = '<div id="select-custom">\n'
     // select_custom_string += `<div id="select-selected" onclick="selectOpen(event)"><h2>Roll: ${current_roll}</h2><span class="dropdown-icon">&#x2228</span></div>\n`
-    select_custom_string += `<div><h2>Roll: ${current_roll}</h2></div>\n`
-    select_custom_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
-    roll_list_sorted.forEach(roll => {
-        let roll_id = roll.slice(0, -3)
-        if (current_roll === roll_id) {
-            select_custom_string += `<div class="current-selection pseudo-hover"><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
-        } else {
-            select_custom_string += `<div><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
-        }
-    })
+    // select_custom_string += `<div><h2>Roll: ${current_roll}</h2></div>\n`
+    select_custom_string += `<h2>Roll: ${current_roll}</h2>\n`
+    // select_custom_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
+    // roll_list_sorted.forEach(roll => {
+    //     let roll_id = roll.slice(0, -3)
+    //     if (current_roll === roll_id) {
+    //         select_custom_string += `<div class="current-selection pseudo-hover"><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
+    //     } else {
+    //         select_custom_string += `<div><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
+    //     }
+    // })
 
-    select_custom_string += '</div>\n</div>\n'
+    // select_custom_string += '</div>\n</div>\n'
 
     // Create roll navigation structure
     roll_list = roll_list.sort()
@@ -559,6 +560,17 @@ async function rollPage(current_roll) {
     <!--${rolls_nav_last}-->
 </div>
     `
+    roll_navigation_string += '<div class="select-items select-hide" onmouseover="mouseoverDropdown(event)">\n'
+    roll_list_sorted.forEach(roll => {
+        let roll_id = roll.slice(0, -3)
+        if (current_roll === roll_id) {
+            roll_navigation_string += `<div class="current-selection pseudo-hover"><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
+        } else {
+            roll_navigation_string += `<div><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
+        }
+    })
+
+    roll_navigation_string += '</div>\n'
     
     // select_custom_string += roll_navigation
     console.log(select_custom_string)
