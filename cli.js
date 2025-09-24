@@ -506,34 +506,38 @@ async function rollPage(current_roll) {
     let previousLink = null;
     let nextLink = null;
     let lastLink = null;
+    let rolls_nav_first
+    let rolls_nav_last
+    let rolls_nav_previous
+    let rolls_nav_next
 
     // Set '<<' and '>>' links
     if (roll_list_sorted[0].slice(0, -3) !== current_roll) {
         firstLink = roll_list_sorted[0].slice(0, -3);
-        let rolls_nav_first = `<span id="rolls_nav_first"><a href="/photo/${firstLink}"><<</a></span>`
+        rolls_nav_first = `<span id="rolls_nav_first"><a href="/photo/${firstLink}"><<</a></span>`
     } else {
-        let rolls_nav_first = '<span id="rolls_nav_first" class="muted"><<</span>'
+        rolls_nav_first = '<span id="rolls_nav_first" class="muted"><<</span>'
     }
 
     if (roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3) !== current_roll) {
         lastLink = roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3);
-        let rolls_nav_last = `<span id="rolls_nav_last"><a href="/photo/${lastLink}"><<</a></span>`
+        rolls_nav_last = `<span id="rolls_nav_last"><a href="/photo/${lastLink}"><<</a></span>`
     } else {
-        let rolls_nav_last = '<span id="rolls_nav_last" class="muted"><<</span>'
+        rolls_nav_last = '<span id="rolls_nav_last" class="muted"><<</span>'
     }
 
     // Set '<' and '>' links based on the current roll's index
     if (currentIndex > 0) {
         previousLink = roll_list_sorted[currentIndex - 1].slice(0, -3)
-        let rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}"><</a></span>`
+        rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}"><</a></span>`
     } else {
-        let rolls_nav_previous = '<span id="rolls_nav_previous" class="muted"><</span>'
+        rolls_nav_previous = '<span id="rolls_nav_previous" class="muted"><</span>'
     }
     if (currentIndex < roll_list_sorted.length - 1) {
         nextLink = roll_list_sorted[currentIndex + 1].slice(0, -3)
-        let rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}"><</a></span>`
+        rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}"><</a></span>`
     } else {
-        let rolls_nav_next = '<span id="rolls_nav_next" class="muted"><</span>'
+        rolls_nav_next = '<span id="rolls_nav_next" class="muted"><</span>'
     }
 
     let roll_navigation = `
@@ -545,6 +549,8 @@ async function rollPage(current_roll) {
         ${rolls_nav_last}
     </div>
     `
+    
+    select_custom_string += roll_navigation
 
     // console.log(select_custom_string)
     return select_custom_string
