@@ -521,9 +521,9 @@ async function rollPage(current_roll) {
 
     if (roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3) !== current_roll) {
         lastLink = roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3);
-        rolls_nav_last = `<span id="rolls_nav_last"><a href="/photo/${lastLink}"><<</a></span>`
+        rolls_nav_last = `<span id="rolls_nav_last"><a href="/photo/${lastLink}">>></a></span>`
     } else {
-        rolls_nav_last = '<span id="rolls_nav_last" class="muted"><<</span>'
+        rolls_nav_last = '<span id="rolls_nav_last" class="muted">>></span>'
     }
 
     // Set '<' and '>' links based on the current roll's index
@@ -535,9 +535,9 @@ async function rollPage(current_roll) {
     }
     if (currentIndex < roll_list_sorted.length - 1) {
         nextLink = roll_list_sorted[currentIndex + 1].slice(0, -3)
-        rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}"><</a></span>`
+        rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}">></a></span>`
     } else {
-        rolls_nav_next = '<span id="rolls_nav_next" class="muted"><</span>'
+        rolls_nav_next = '<span id="rolls_nav_next" class="muted">></span>'
     }
 
     let roll_navigation = `
