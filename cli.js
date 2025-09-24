@@ -548,7 +548,7 @@ async function rollPage(current_roll) {
     }
 
     let roll_navigation_string = `
-<div id='rolls_navigation'>
+<div id='rolls_navigation' class='muted'>
     <!--${rolls_nav_first}-->
     ${rolls_nav_previous}
     <span>|</span>
