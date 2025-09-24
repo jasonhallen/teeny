@@ -179,7 +179,6 @@ async function processPage(pagePath) {
         if (targetPath === "photo") {
             // Insert title with roll dropdown
             let image_page_header = await rollPage(frontmatter.title)
-            image_page_header += '<p>[More &#x2228;]</p>'
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
@@ -496,7 +495,57 @@ async function rollPage(current_roll) {
             select_custom_string += `<div><a href="/photo/${roll_id}">${roll_id}</a></div>\n`
         }
     })
+
     select_custom_string += '</div>\n</div>\n'
+
+    // Create roll navigation structure
+    const currentIndex = roll_list_sorted.findIndex(roll => roll.slice(0, -3) === current_roll)
+    
+    // Initialize links
+    let firstLink = null;
+    let previousLink = null;
+    let nextLink = null;
+    let lastLink = null;
+
+    // Set '<<' and '>>' links
+    if (roll_list_sorted[0].slice(0, -3) !== current_roll) {
+        firstLink = roll_list_sorted[0].slice(0, -3);
+        let rolls_nav_first = `<span id="rolls_nav_first"><a href="/photo/${firstLink}"><<</a></span>`
+    } else {
+        let rolls_nav_first = '<span id="rolls_nav_first" class="muted"><<</span>'
+    }
+
+    if (roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3) !== current_roll) {
+        lastLink = roll_list_sorted[roll_list_sorted.length - 1].slice(0, -3);
+        let rolls_nav_last = `<span id="rolls_nav_last"><a href="/photo/${lastLink}"><<</a></span>`
+    } else {
+        let rolls_nav_last = '<span id="rolls_nav_last" class="muted"><<</span>'
+    }
+
+    // Set '<' and '>' links based on the current roll's index
+    if (currentIndex > 0) {
+        previousLink = roll_list_sorted[currentIndex - 1].slice(0, -3)
+        let rolls_nav_previous = `<span id="rolls_nav_previous"><a href="/photo/${previousLink}"><</a></span>`
+    } else {
+        let rolls_nav_previous = '<span id="rolls_nav_previous" class="muted"><</span>'
+    }
+    if (currentIndex < roll_list_sorted.length - 1) {
+        nextLink = roll_list_sorted[currentIndex + 1].slice(0, -3)
+        let rolls_nav_next = `<span id="rolls_nav_next"><a href="/photo/${nextLink}"><</a></span>`
+    } else {
+        let rolls_nav_next = '<span id="rolls_nav_next" class="muted"><</span>'
+    }
+
+    let roll_navigation = `
+    <div id='rolls_navigation'>
+        ${rolls_nav_first}
+        ${rolls_nav_previous}
+        <span id="rolls_nav_select"></span>
+        ${rolls_nav_next}
+        ${rolls_nav_last}
+    </div>
+    `
+
     // console.log(select_custom_string)
     return select_custom_string
 
