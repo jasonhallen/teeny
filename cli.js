@@ -178,11 +178,12 @@ async function processPage(pagePath) {
     if (frontmatter.title) {
         if (targetPath === "photo") {
             // Insert title with roll dropdown
-            let image_page_header = await rollPage(frontmatter.title)
+            let image_page_header, roll_navigation_string = await rollPage(frontmatter.title)
             if (frontmatter.film) {
                 image_page_header += `<p class="muted photo-metadata">${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
             markdown = image_page_header + markdown
+            markdown = roll_navigation_string + markdown
             let roll_list = await fs.readdir(`pages/photo`)
             const roll_list_sorted = roll_list.sort().reverse()
             if (`${frontmatter.title}.md` === roll_list_sorted[0]) {
@@ -541,7 +542,7 @@ async function rollPage(current_roll) {
         rolls_nav_next = '<span id="rolls_nav_next" class="muted">></span>'
     }
 
-    let roll_navigation = `
+    let roll_navigation_string = `
 <div id='rolls_navigation'>
     ${rolls_nav_first}
     ${rolls_nav_previous}
@@ -551,11 +552,11 @@ async function rollPage(current_roll) {
 </div>
     `
     
-    select_custom_string += roll_navigation
+    // select_custom_string += roll_navigation
     console.log(select_custom_string)
 
     // console.log(select_custom_string)
-    return select_custom_string
+    return select_custom_string, roll_navigation_string
 
     // Sort by reverse numerical order
     // Create div container - select-custom
