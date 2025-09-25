@@ -175,6 +175,9 @@ async function processPage(pagePath) {
     const film_svg = `
 <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">  .st0{fill:#000000;}  </style> <g> <path class="st0" d="M0,48v416h512V48H0z M92,424H36v-32h56V424z M92,120H36V88h56V120z M188,424h-56v-32h56V424z M188,120h-56V88 h56V120z M284,424h-56v-32h56V424z M284,120h-56V88h56V120z M380,424h-56v-32h56V424z M380,120h-56V88h56V120z M476,424h-56v-32h56 V424z M476,120h-56V88h56V120z"></path> </g> </g></svg>
     `
+    const camera_svg = `
+<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path clip-rule="evenodd" d="M3 3H0V14H16V3H13L11 1H5L3 3ZM8 11C9.65685 11 11 9.65685 11 8C11 6.34315 9.65685 5 8 5C6.34315 5 5 6.34315 5 8C5 9.65685 6.34315 11 8 11Z" fill-rule="evenodd"></path></g></svg>
+    `
     let latest_roll = false;
     // Add H2 title
     if (frontmatter.title) {
@@ -182,7 +185,7 @@ async function processPage(pagePath) {
             // Insert title with roll dropdown
             let [image_page_header, roll_navigation_string] = await rollPage(frontmatter.title)
             if (frontmatter.film) {
-                image_page_header += `<p class="muted photo-metadata">${film_svg} ${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
+                image_page_header += `<p class="muted photo-metadata">${film_svg} ${frontmatter.film}</br>${camera_svg} ${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
             // image_page_header += roll_navigation_string
             markdown = image_page_header + markdown
