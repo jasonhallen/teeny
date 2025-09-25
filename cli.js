@@ -184,16 +184,13 @@ async function processPage(pagePath) {
     const metadata_string = `
 <div>
     <div class='photo-metadata-line'>
-        ${film_svg}
-        <span>${frontmatter.film}</span>
+        ${film_svg}<span>${frontmatter.film}</span>
     </div>
     <div class='photo-metadata-line'>
-        ${camera_svg}
-        <span>${frontmatter.camera}</span>
+        ${camera_svg}<span>${frontmatter.camera}</span>
     </div>
     <div class='photo-metadata-line'>
-        ${date_svg}
-        <span>${frontmatter.dates}</span>
+        ${date_svg}<span>${frontmatter.dates}</span>
     </div>
 </div>
     `
