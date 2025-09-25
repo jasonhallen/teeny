@@ -172,8 +172,8 @@ async function processPage(pagePath) {
     else if (frontmatter.image && frontmatter.imageCaption) {
         markdown = `<figure><img class="cover-image" src='${frontmatter.image}' alt='${frontmatter.imageAlt}'><figcaption>${frontmatter.imageCaption}</figcaption></figure>\n\n` + markdown
     }
-    const svg = `
-<svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M314.85,363.016l-8.786,8.786l-12.426,0.106l-27.164,0.233l-16.377,0.141v0.124H61.454v-30.367h174.389l0.004-0.524 l0.233-27.164l0.106-12.426l8.787-8.786l21.955-21.955H61.454v-30.367h235.842l20.245-20.245H61.454v-30.367h265.185v21.268 l61.454-61.454V0.424H0v511.152h388.094V289.771L314.85,363.016z M326.64,169.961H151.317v-30.367H326.64V169.961z M61.454,88.983 h265.185v30.367H61.454V88.983z M61.454,139.594h59.495v30.367H61.454V139.594z M61.454,291.428h151.608v30.367H61.454V291.428z"></path> </g> </g> <g> <g> <path d="M506.423,101.568c-3.597-3.597-8.379-5.578-13.466-5.578c-5.086,0-9.868,1.981-13.465,5.577l-17.947,17.947l26.93,26.93 l17.947-17.947c3.596-3.596,5.577-8.378,5.577-13.465S510.019,105.164,506.423,101.568z"></path> </g> </g> <g> <g> <polygon points="440.072,140.986 266.446,314.612 266.213,341.775 293.377,341.542 467.004,167.917 "></polygon> </g> </g> </g></svg>
+    const film_svg = `
+<svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#000000;} </style> <g> <path class="st0" d="M459.548,221.426h-1.673c-28.968,0-52.453-25.814-52.453-57.655v-18.922c0-31.841-23.484-57.655-52.452-57.655 h-78.922v366.083h185.499c28.967,0,52.452-25.814,52.452-57.655V279.08C512,247.24,488.515,221.426,459.548,221.426z M319.225,424.805h-25.878v-40.678h25.878V424.805z M319.225,158.785h-25.878v-40.678h25.878V158.785z M369.716,424.805h-25.878 v-40.678h25.878V424.805z M369.716,158.785h-25.878v-40.678h25.878V158.785z M419.462,424.805h-25.878v-40.678h25.878V424.805z M469.209,424.805h-25.87v-40.678h25.87V424.805z"></path> <rect y="123.806" class="st0" width="253.551" height="296.934"></rect> <rect y="445.137" class="st0" width="253.551" height="32.545"></rect> <polygon class="st0" points="172.732,34.318 75.928,34.318 75.928,66.856 0,66.856 0,99.401 253.551,99.401 253.551,66.856 172.732,66.856 "></polygon> </g> </g></svg>
     `
     let latest_roll = false;
     // Add H2 title
@@ -182,7 +182,7 @@ async function processPage(pagePath) {
             // Insert title with roll dropdown
             let [image_page_header, roll_navigation_string] = await rollPage(frontmatter.title)
             if (frontmatter.film) {
-                image_page_header += `<p class="muted photo-metadata">${svg}${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
+                image_page_header += `<p class="muted photo-metadata">${film_svg} ${frontmatter.film}</br>${frontmatter.camera}</br>${frontmatter.dates}</p>`
             }
             // image_page_header += roll_navigation_string
             markdown = image_page_header + markdown
