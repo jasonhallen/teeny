@@ -221,7 +221,7 @@ async function processPage(pagePath) {
     markdown = markdown.replace("[READ MORE]", `<a class="readmore" href="/">Read more</a>`)
 
     // Convert .md markdown into HTML
-    const parsedHtml = marked.parseInline(markdown)
+    const parsedHtml = marked.parse(markdown)
 
     if (targetPath === 'photo') {
         const tempDom = new JSDOM(parsedHtml);
