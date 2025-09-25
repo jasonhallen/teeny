@@ -181,8 +181,9 @@ async function processPage(pagePath) {
     const date_svg = `
 <svg class="photo-icons" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>calendar-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="scheduler" transform="translate(64.000000, 64.000000)"> <path d="M384,106.666667 L384,384 L1.42108547e-14,384 L1.42108547e-14,106.666667 L384,106.666667 Z M128,256 L85.3333333,256 L85.3333333,298.666667 L128,298.666667 L128,256 Z M213.333333,256 L170.666667,256 L170.666667,298.666667 L213.333333,298.666667 L213.333333,256 Z M298.666667,256 L256,256 L256,298.666667 L298.666667,298.666667 L298.666667,256 Z M128,170.666667 L85.3333333,170.666667 L85.3333333,213.333333 L128,213.333333 L128,170.666667 Z M213.333333,170.666667 L170.666667,170.666667 L170.666667,213.333333 L213.333333,213.333333 L213.333333,170.666667 Z M298.666667,170.666667 L256,170.666667 L256,213.333333 L298.666667,213.333333 L298.666667,170.666667 Z M1.42108547e-14,1.42108547e-14 L384,1.42108547e-14 L384,64 L1.42108547e-14,64 L1.42108547e-14,1.42108547e-14 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
     `
+    
     const metadata_string = `
-<div>
+<div class='muted photo-metadata'>
     <div class='photo-metadata-line'>
         ${film_svg}<span>${frontmatter.film}</span>
     </div>
@@ -194,6 +195,7 @@ async function processPage(pagePath) {
     </div>
 </div>
     `
+    
     let latest_roll = false;
     // Add H2 title
     if (frontmatter.title) {
