@@ -179,7 +179,7 @@ async function processPage(pagePath) {
 <svg class="photo-icons" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path clip-rule="evenodd" d="M3 3H0V14H16V3H13L11 1H5L3 3ZM8 11C9.65685 11 11 9.65685 11 8C11 6.34315 9.65685 5 8 5C6.34315 5 5 6.34315 5 8C5 9.65685 6.34315 11 8 11Z" fill-rule="evenodd"></path></g></svg>
     `
     const date_svg = `
-<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 0H3V2H1V5H15V2H13V0H10V2H6V0Z" ></path> <path d="M15 7H1V15H15V7Z" fill="#000000"></path> </g></svg>
+<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 0H3V2H1V5H15V2H13V0H10V2H6V0Z" fill="#000000"></path> <path d="M15 7H1V15H15V7Z" fill="#000000"></path> </g></svg>
     `
     
     const metadata_string = `
