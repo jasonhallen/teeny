@@ -200,6 +200,7 @@ async function processPage(pagePath) {
     // Add H2 title
     if (frontmatter.title) {
         if (targetPath === "photo") {
+            document.title = `Roll: ${frontmatter.title}`
             // Insert title with roll dropdown
             let [image_page_header, roll_navigation_string] = await rollPage(frontmatter.title)
             if (frontmatter.film) {
