@@ -597,7 +597,7 @@ async function rollPage(current_roll) {
     `
     
     select_custom_string += roll_navigation_string
-    console.log(select_custom_string)
+    // console.log(select_custom_string)
 
     // console.log(select_custom_string)
     return [select_custom_string, roll_navigation_string]
