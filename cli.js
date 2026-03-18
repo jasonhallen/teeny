@@ -201,6 +201,7 @@ async function processPage(pagePath) {
     if (frontmatter.title) {
         if (targetPath === "photo") {
             document.title = `Roll: ${frontmatter.title}`
+            console.log("Processed roll title")
             // Insert title with roll dropdown
             let [image_page_header, roll_navigation_string] = await rollPage(frontmatter.title)
             if (frontmatter.film) {
