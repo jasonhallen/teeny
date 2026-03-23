@@ -232,6 +232,7 @@ async function processPage(pagePath) {
 
         const photoDiv = tempDocument.querySelector('#photos')
         const linkHtml = '<a href="/more-photos">View More</a>'
+        console.log("TESTING")
 
         photoDiv.insertAdjacentHTML('beforeend', linkHtml)
 
