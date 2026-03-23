@@ -220,7 +220,7 @@ async function processPage(pagePath) {
             markdown = `<h2>${frontmatter.title}</h2>\n\n` + markdown
         }
     }
-    markdown = markdown.replace("[READ MORE]", `<a class="back-to-top" href="/">Back to top</a>`)
+    markdown = markdown.replace("[READ MORE]", `<a class="readmore" href="/">Read more</a>`)
 
     // Convert .md markdown into HTML
     var parsedHtml = marked.parse(markdown)
@@ -231,7 +231,7 @@ async function processPage(pagePath) {
         const firstImg = tempDocument.querySelector('img')
 
         const photoDiv = tempDocument.querySelector('#photos')
-        const linkHtml = '<a href="/more-photos">View More</a>'
+        const linkHtml = '<a href="">Back to top</a>'
         console.log(photoDiv)
 
         photoDiv.insertAdjacentHTML('beforeend', linkHtml)
