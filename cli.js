@@ -236,6 +236,8 @@ async function processPage(pagePath) {
 
         photoDiv.insertAdjacentHTML('beforeend', linkHtml)
 
+        parsedHtml = tempDocument.body.innerHTML
+
         let firstImagePath = null
 
         if (firstImg) {
@@ -250,6 +252,7 @@ async function processPage(pagePath) {
             // console.log("TESTING")
             // console.log('Preload link attributes:', preloadLink.outerHTML);
         }
+
 
     }
     
