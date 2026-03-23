@@ -228,14 +228,14 @@ async function processPage(pagePath) {
     if (targetPath === 'photo') {
         const tempDom = new JSDOM(parsedHtml);
         const tempDocument = tempDom.window.document;
-        const firstImg = tempDocument.querySelector('img');
+        const firstImg = tempDocument.querySelector('img')
 
-        const photoDiv = document.querySelector('#photos');
-        const linkHtml = '<a href="/more-photos">View More</a>';
+        const photoDiv = tempDom.querySelector('#photos')
+        const linkHtml = '<a href="/more-photos">View More</a>'
 
-        photoDiv.insertAdjacentHTML('beforeend', linkHtml);
+        photoDiv.insertAdjacentHTML('beforeend', linkHtml)
 
-        let firstImagePath = null;
+        let firstImagePath = null
 
         if (firstImg) {
             firstImagePath = firstImg.getAttribute('src');
