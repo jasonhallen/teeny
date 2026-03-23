@@ -231,7 +231,7 @@ async function processPage(pagePath) {
         const firstImg = tempDocument.querySelector('img')
 
         const photoDiv = tempDocument.querySelector('#photos')
-        const linkHtml = '<a href="">Back to top</a>'
+        const linkHtml = '<a href="" onclick="window.scrollTo({top: 0, behavior: \'smooth\'}); return false;">Back to top</a>'
         console.log(photoDiv)
 
         photoDiv.insertAdjacentHTML('beforeend', linkHtml)
